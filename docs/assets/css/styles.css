@@ -2338,3 +2338,265 @@ select.form-control {
   border: 1px solid #e2e8f0;
 }
 
+/* ==========================================================================
+   CBS Layout & Main Container (Module Pages Universal Shell Support)
+   ========================================================================== */
+.dashboard-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app, #f8fafc);
+  color: var(--slate-800, #1e293b);
+  min-height: 100vh;
+}
+
+.cbs-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.cbs-main-container {
+  display: flex;
+  flex: 1;
+  padding-top: var(--header-height);
+  min-height: calc(100vh - var(--header-height));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Sidebar inside .cbs-main-container (no ticker bar) */
+.cbs-main-container > .cbs-sidebar,
+.cbs-main-container .cbs-sidebar {
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+}
+
+.cbs-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1400px;
+  width: 100%;
+  min-width: 0; /* Prevents overflow clipping in flex containers */
+  box-sizing: border-box;
+}
+
+/* Header branding in Pattern C pages */
+.cbs-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.cbs-logo-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+  color: var(--navy-950);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.cbs-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cbs-brand-title {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  line-height: 1.2;
+}
+
+.cbs-brand-subtitle {
+  color: var(--gold-400);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badge-demo {
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-logout {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-logout:hover {
+  background: rgba(220, 38, 38, 0.35);
+  color: #ffffff;
+}
+
+/* Breadcrumbs in Pattern C pages */
+.breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--slate-500);
+  margin-bottom: 16px;
+}
+
+.breadcrumb-bar .breadcrumb-item {
+  color: var(--navy-600);
+  text-decoration: none;
+}
+
+.breadcrumb-bar .breadcrumb-item:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-bar .breadcrumb-item.active {
+  color: var(--slate-700);
+  font-weight: 600;
+}
+
+.breadcrumb-bar .breadcrumb-item::after {
+  content: "";
+}
+
+.breadcrumb-sep {
+  color: var(--slate-400);
+}
+
+/* Pattern C common module elements */
+.cbs-text-muted {
+  color: var(--slate-500);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.filter-box {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(241, 245, 249, 0.9);
+}
+
+.badge-primary {
+  background: rgba(30, 91, 184, 0.12);
+  color: var(--navy-600);
+  border: 1px solid rgba(30, 91, 184, 0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-secondary {
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--slate-600);
+  border: 1px solid rgba(100, 116, 139, 0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--slate-700);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-outline:hover {
+  background: var(--slate-100);
+  border-color: var(--slate-400);
+}
+
+.form-control-sm {
+  padding: 6px 10px;
+  font-size: 12px;
+  height: 32px;
+}
+
+.query-variant-tag {
+  display: inline-block;
+  background: var(--slate-100);
+  color: var(--slate-700);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+.seal-box {
+  border: 2px dashed var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+  color: var(--slate-400);
+  margin-top: 16px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 1024px) {
+  .cbs-main-container > .cbs-sidebar,
+  .cbs-main-container .cbs-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    z-index: 1050;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cbs-main-container > .cbs-sidebar.open,
+  .cbs-main-container .cbs-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .cbs-content {
+    padding: 16px;
+  }
+}
+
+

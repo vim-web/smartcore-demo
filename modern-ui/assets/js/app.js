@@ -416,11 +416,24 @@ window.openPendingModal = (fn, title, cat) => CBS.showPendingModule(fn, title, c
 
 // Global Initialization on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Sidebar Toggle
-  const toggleBtn = document.querySelector('.cbs-menu-toggle');
+  // Mobile Sidebar Toggle (Supports .cbs-menu-toggle, .nav-toggle, #sidebar-toggle, and Pattern C pages)
   const sidebar = document.querySelector('.cbs-sidebar');
+  let toggleBtn = document.querySelector('.cbs-menu-toggle') || document.querySelector('.nav-toggle') || document.querySelector('#sidebar-toggle');
+
+  if (sidebar && !toggleBtn) {
+    const headerLeft = document.querySelector('.header-left') || document.querySelector('.cbs-brand');
+    if (headerLeft) {
+      toggleBtn = document.createElement('button');
+      toggleBtn.className = 'cbs-menu-toggle';
+      toggleBtn.setAttribute('aria-label', 'Toggle Navigation');
+      toggleBtn.innerHTML = '&#9776;';
+      headerLeft.insertBefore(toggleBtn, headerLeft.firstChild);
+    }
+  }
+
   if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       sidebar.classList.toggle('open');
     });
 
