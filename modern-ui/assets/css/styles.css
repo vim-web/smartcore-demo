@@ -1245,18 +1245,28 @@ select.form-control {
    Login Screen Specific Styling
    ========================================================================== */
 .cbs-login-page {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 50%, var(--navy-800) 100%);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.cbs-login-page > header {
+  flex-shrink: 0;
+  padding: clamp(10px, 2vh, 20px) clamp(16px, 3vw, 40px);
+}
+
+.cbs-login-page > footer {
+  flex-shrink: 0;
+  padding: clamp(8px, 1.5vh, 20px);
 }
 
 .cbs-login-container {
-  max-width: 1080px;
-  width: 90%;
-  margin: auto;
-  padding: 40px 0;
+  max-width: 960px;
+  width: clamp(300px, 90%, 960px);
+  margin: 0 auto;
+  padding: 0;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   background: #ffffff;
@@ -1264,12 +1274,15 @@ select.form-control {
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  /* Allow card to scroll naturally if viewport is very short */
+  overflow-y: visible;
 }
 
 .cbs-login-hero {
   background: linear-gradient(145deg, #091a2e 0%, #0f2c4e 60%, #15457a 100%);
   color: #ffffff;
-  padding: 48px;
+  padding: clamp(24px, 4vh, 48px) clamp(20px, 3.5vw, 48px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1280,18 +1293,18 @@ select.form-control {
 .cbs-login-hero-top {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(12px, 2vh, 24px);
 }
 
 .cbs-login-hero h1 {
-  font-size: 26px;
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.25;
 }
 
 .cbs-login-hero p {
-  font-size: 13px;
+  font-size: clamp(11px, 1vw, 13px);
   color: #cbd5e1;
   line-height: 1.6;
 }
@@ -1300,15 +1313,15 @@ select.form-control {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
+  gap: clamp(6px, 1vh, 12px);
+  margin-top: clamp(10px, 1.5vh, 20px);
 }
 
 .cbs-login-features li {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 12.5px;
+  font-size: clamp(11px, 0.9vw, 12.5px);
   color: #e2e8f0;
 }
 
@@ -1326,7 +1339,7 @@ select.form-control {
 }
 
 .cbs-login-form-panel {
-  padding: 48px;
+  padding: clamp(20px, 4vh, 48px) clamp(20px, 3.5vw, 48px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1334,17 +1347,17 @@ select.form-control {
 }
 
 .cbs-login-form-header {
-  margin-bottom: 28px;
+  margin-bottom: clamp(14px, 2vh, 28px);
 }
 
 .cbs-login-form-header h2 {
-  font-size: 20px;
+  font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 700;
   color: var(--navy-950);
 }
 
 .cbs-login-form-header p {
-  font-size: 12.5px;
+  font-size: clamp(11px, 0.9vw, 12.5px);
   color: var(--slate-500);
   margin-top: 4px;
 }
@@ -1355,8 +1368,12 @@ select.form-control {
 @media (max-width: 1024px) {
   .cbs-login-container {
     grid-template-columns: 1fr;
+    width: clamp(280px, 94%, 520px);
   }
   .cbs-login-hero {
+    display: none;
+  }
+  .cbs-login-page > header .cbs-demo-pill + span {
     display: none;
   }
   .cbs-sidebar {
@@ -1379,6 +1396,28 @@ select.form-control {
   }
   .cbs-main {
     padding: 16px;
+  }
+}
+
+/* Login page: narrow phone adjustments */
+@media (max-width: 480px) {
+  .cbs-login-container {
+    width: 96%;
+    border-radius: var(--radius-lg);
+  }
+  .cbs-login-form-panel {
+    padding: 20px 16px;
+  }
+  /* Allow Reset button to sit below Login on very small screens */
+  .cbs-login-form-panel form > div[style*="display: flex"][style*="gap: 10px"] {
+    flex-wrap: wrap;
+  }
+  .cbs-demo-label {
+    display: none;
+  }
+  .cbs-demo-pill-text {
+    font-size: 10px;
+    letter-spacing: 0.2px;
   }
 }
 

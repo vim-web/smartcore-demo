@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,38 +10,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body class="cbs-login-page">
 
   <!-- Minimal Brand Header -->
-  <header style="padding: 20px 40px; display: flex; align-items: center; justify-content: space-between;">
+  <header
+    style="padding: clamp(10px,2vh,20px) clamp(16px,3vw,40px); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 8px;">
     <div style="display: flex; align-items: center; gap: 12px;">
       <img src="assets/images/logo.svg" alt="SMARTCORE CBS" style="height: 42px;">
     </div>
-    <div style="display: flex; align-items: center; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 1; min-width: 0;">
       <span class="cbs-demo-pill">
-        <span class="cbs-demo-dot"></span> SMARTCORE DEMO MODE
+        <span class="cbs-demo-dot"></span> <span class="cbs-demo-pill-text">SMARTCORE DEMO MODE</span>
       </span>
-      <span style="color: #94a3b8; font-size: 12px;">Static UI Demonstration</span>
+      <span class="cbs-demo-label" style="color: #94a3b8; font-size: 12px;">Static UI Demonstration</span>
     </div>
   </header>
 
   <!-- Login Card Container -->
   <main class="cbs-login-container">
-    
+
     <!-- Hero / Corporate Profile Panel (from original LoginPage.aspx) -->
     <div class="cbs-login-hero">
       <div class="cbs-login-hero-top">
         <div>
-          <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-400); font-weight: 700;">SAFE & SMARTBANK</span>
+          <span
+            style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-400); font-weight: 700;">SAFE
+            & SMARTBANK</span>
           <h1 style="margin-top: 6px;">SMARTCORE Core Banking Solution</h1>
         </div>
-        
+
         <p style="text-align: justify;">
-          An ISO 9001-2008 Certified Company (implementing ISO 27001 Information Security Management System) with more than <strong>140+ Banking & Financial Clients</strong> and over <strong>400+ Software, 500+ Hardware & 400+ Network</strong> installations.
+          An ISO 9001-2008 Certified Company (implementing ISO 27001 Information Security Management System) with more
+          than <strong>140+ Banking & Financial Clients</strong> and over <strong>400+ Software, 500+ Hardware & 400+
+            Network</strong> installations.
         </p>
 
         <p style="text-align: justify; font-size: 12px; color: #94a3b8;">
-          Backed by 70+ committed banking IT specialists with over 15 years of proven experience in the co-operative banking sector, supported by premier technology partners including IBM, Cisco, Microsoft, APC, Emerson, Reliance, Wipro and Epson.
+          Backed by 70+ committed banking IT specialists with over 15 years of proven experience in the co-operative
+          banking sector, supported by premier technology partners including IBM, Cisco, Microsoft, APC, Emerson,
+          Reliance, Wipro and Epson.
         </p>
 
         <ul class="cbs-login-features">
@@ -90,38 +99,52 @@
           <label class="form-label" for="TxtLogin">
             Login ID <span class="req">*</span>
           </label>
-          <input type="text" id="TxtLogin" class="form-control mono" value="ADMIN_CBS" placeholder="Enter CBS User ID" required autocomplete="username">
+          <input type="text" id="TxtLogin" class="form-control mono" value="ADMIN_CBS" placeholder="Enter CBS User ID"
+            required autocomplete="username">
         </div>
 
         <div class="form-group" style="margin-bottom: 16px;">
           <label class="form-label" for="TxtPswd">
             Password <span class="req">*</span>
           </label>
-          <input type="password" id="TxtPswd" class="form-control" value="DemoPassword@123" placeholder="Enter account password" required autocomplete="current-password">
+          <input type="password" id="TxtPswd" class="form-control" value="DemoPassword@123"
+            placeholder="Enter account password" required autocomplete="current-password">
         </div>
 
         <div class="form-group" style="margin-bottom: 24px;">
           <label class="form-label" for="DtpLoginDate">
             Login Date <span class="req">*</span>
           </label>
-          <input type="text" id="DtpLoginDate" class="form-control mono" value="29/10/2026" placeholder="DD/MM/YYYY" required>
+          <input type="text" id="DtpLoginDate" class="form-control mono" value="29/10/2026" placeholder="DD/MM/YYYY"
+            required>
         </div>
 
         <div style="display: flex; gap: 10px; margin-bottom: 16px;">
           <button type="submit" id="CmbLogin" class="btn btn-primary btn-lg" style="flex: 2;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
             Login to CBS
           </button>
-          <button type="button" id="CmdClose" class="btn btn-secondary btn-lg" style="flex: 1;" onclick="document.getElementById('loginForm').reset(); CBS.showToast('Login fields cleared.', 'info');">
+          <button type="button" id="CmdClose" class="btn btn-secondary btn-lg" style="flex: 1;"
+            onclick="document.getElementById('loginForm').reset(); CBS.showToast('Login fields cleared.', 'info');">
             Reset
           </button>
         </div>
 
         <!-- Demo Mode Guide Tag -->
-        <div style="background: var(--navy-50); border: 1px dashed var(--navy-400); border-radius: var(--radius-md); padding: 10px 14px; font-size: 11.5px; color: var(--navy-800); display: flex; align-items: center; gap: 8px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div
+          style="background: var(--navy-50); border: 1px dashed var(--navy-400); border-radius: var(--radius-md); padding: 10px 14px; font-size: 11.5px; color: var(--navy-800); display: flex; align-items: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
           <div>
-            <strong>Interactive Demo:</strong> Pre-filled with demo credentials. Clicking <strong>Login to CBS</strong> will navigate to the modernized CBS Dashboard.
+            <strong>Interactive Demo:</strong> Pre-filled with demo credentials. Clicking <strong>Login to CBS</strong>
+            will navigate to the modernized CBS Dashboard.
           </div>
         </div>
       </form>
@@ -131,10 +154,14 @@
 
   <!-- Footer (from original LoginPage.aspx) -->
   <footer style="text-align: center; padding: 20px; font-size: 11.5px; color: #94a3b8;">
-    <p>Copyright &copy; 2012 - 2026 by <a href="http://www.safenetin.net" style="color: #cbd5e1; text-decoration: underline;" target="_blank" rel="noopener">Safe Software and Integrated Solutions Pvt Ltd</a>. All Rights Reserved.</p>
-    <p style="margin-top: 4px; color: #64748b;">SMARTCORE Core Banking Solution (CBS) — Modernized Static Demonstration</p>
+    <p>Copyright &copy; 2012 - 2026 by <a href="http://www.safenetin.net"
+        style="color: #cbd5e1; text-decoration: underline;" target="_blank" rel="noopener">Safe Software and Integrated
+        Solutions Pvt Ltd</a>. All Rights Reserved.</p>
+    <p style="margin-top: 4px; color: #64748b;">SMARTCORE Core Banking Solution (CBS) — Modernized Static Demonstration
+    </p>
   </footer>
 
   <script src="assets/js/app.js"></script>
 </body>
+
 </html>
