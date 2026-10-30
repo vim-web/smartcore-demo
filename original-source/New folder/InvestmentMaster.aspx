@@ -1,0 +1,561 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="InvestmentMaster.aspx.vb" MasterPageFile="~/SMARTCORE.Master"  Inherits="SMARTCORE_UI.InvestmentMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp"  %>
+
+<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
+    <link href="CSS/PageStyle.css" rel="stylesheet" type="text/css" />      
+    <script type='text/javascript' src="Scripts/Common.js"></script>  
+    <script type='text/javascript' src="Scripts/jquery-1.8.3.js"></script>  
+
+</asp:Content>
+<asp:Content ID="Content2" runat="server" 
+    contentplaceholderid="ContentPlaceHolder1">    
+     <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+                <ContentTemplate>
+                
+                 <script type = "text/javascript">
+
+                     // To Bind the function to the textbox for moving the cursor from one textbox to another
+                     $(document).ready(function() {
+
+                         var elem = document.getElementById('<%=DivMain.ClientID%>').getElementsByTagName("*");
+
+                         for (var i = 0; i < elem.length; i++) {
+                             elem[i].disabled = true;
+                         }
+
+                     });
+
+
+
+                 </script>
+                 
+                 
+   
+                 
+       
+     <div  style="width: 98%; margin-left:1%; margin-right:1%;margin-top:1%;" >  
+     
+   <asp:Panel ID="PnlAuthorise" runat="server">                          
+                    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                        <Scripts>
+                            <asp:ScriptReference Path="~/Scripts/FixFocus.js" />
+                        </Scripts>
+                        
+                        
+                        
+                        
+                    </asp:ToolkitScriptManager>
+        <legend>ACCOUNT OPEN</legend>       
+        
+      
+ <div id="DivMain" runat ="server" style="float:left"  > 
+<table width="100%" >
+  <tr>
+    <td width="2%"></td>
+    <td width="20%"><label>Branch</label></td>
+    <td width="27%">
+            <asp:DropDownList ID="CmbBranch" runat="server" Width="100%">
+            </asp:DropDownList>
+        </td>
+	<td width="2%"></td>
+    <td width="20%"><label>Mode of Operation</label></td>
+    <td width="27%">
+            <asp:DropDownList ID="CmbOpMode" runat="server" Width="100%" TabIndex="1">
+            </asp:DropDownList>
+        </td>
+    <td width="2%"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><label>Scheme</label></td>
+    <td>
+            <asp:DropDownList ID="CmbScheme" runat="server" Width="100%" 
+                AutoPostBack="True" TabIndex="4">
+            </asp:DropDownList>
+        </td>
+    <td></td>
+    <td><label>No of Operators</label></td>
+    <td>
+            <asp:TextBox  CssClass="twitterStyleTextbox"  ID="TxtNoOfOperator" runat="server"  Width="98%"></asp:TextBox>
+        </td>
+    <td></td>
+  </tr>
+</table>
+</div>   
+          
+                    <table  width="100%" style="float:left">
+                        <tr>
+                            <td width="2%">
+                            </td>
+                            <td width="96%" style="padding:30px 0px 30px 0px">
+                                <asp:GridView ID="DgvCustomer" runat="server" AutoGenerateColumns="False"  CssClass="grid-viewNew"
+                                    DataKeyNames="CustID" TabIndex="23" Width="100%">
+                                    <Columns>
+                                        <asp:BoundField DataField="MemDtls" HeaderText="Member Details">
+                                            
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="MemBrCode" HeaderText="Member BrCode" 
+                                            Visible="False" />
+                                        <asp:BoundField DataField="MemSchCode" HeaderText="MemSchCode" 
+                                            Visible="False" />
+                                        <asp:BoundField DataField="MemNo" HeaderText="Member No" Visible="False">
+                                           
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CustID" HeaderText="Customer ID">
+                                           
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CustName" DataFormatString="{0:F2}" 
+                                            HeaderText="Name">
+                                            
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Relation" HeaderText="Relation">
+                                            
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CustAdd" HeaderText="Address">
+                                            
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CustType" HeaderText="CustType" Visible="False" />
+                                        <asp:BoundField DataField="CustCatg" HeaderText="CustCatg" Visible="False" />
+                                        <asp:BoundField DataField="HouseNm" HeaderText="HouseNm" Visible="False" />
+                                        <asp:BoundField DataField="Place" HeaderText="Place" Visible="False" />
+                                        <asp:BoundField DataField="Dist" HeaderText="Dist" Visible="False" />
+                                        <asp:BoundField DataField="State" HeaderText="State" Visible="False" />
+                                        <asp:BoundField DataField="Country" HeaderText="Country" Visible="False" />
+                                        <asp:BoundField DataField="Pincode" HeaderText="PinCode" Visible="False" />
+                                        <asp:BoundField DataField="MblNo" HeaderText="MblNo" Visible="False" />
+                                        <asp:BoundField DataField="LandPh" HeaderText="LandPh" Visible="False" />
+                                        <asp:BoundField DataField="RelType" HeaderText="RelType" Visible="False" />
+                                        <asp:BoundField DataField="Dob" HeaderText="Dob">
+                                            
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Age" HeaderText="Age">
+                                           
+                                        </asp:BoundField>
+                                    </Columns>
+                                    <AlternatingRowStyle BackColor="#F5F4FF" />
+                                </asp:GridView>
+                            </td>
+                            <td width="2%">
+                            </td>
+                        </tr>
+                    </table>
+        
+        
+        
+<table width = "100%" style="float:left">
+	<tr>
+		<td width = "2%"> </td>
+		<td width = "15%"> </td>
+		<td width = "15%"> </td>
+		<td width = "2%"> </td>
+		<td width = "16%"> </td>
+		<td width = "16%"> </td>
+		<td width = "2%"> </td>
+		<td width = "15%"> </td>
+		<td width = "15%"> </td>
+		<td width = "2%"> </td>
+	</tr>
+    <tr>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_Agent" runat="server" CssClass="lblCSS" Text="FD A/c No"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:TextBox ID="Txt_BankAcNo" runat="server" CssClass="twitterStyleTextbox" TabIndex="1" Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="16%">
+            <asp:Label ID="Lbl_OpeningDate" runat="server" CssClass="lblCSS" Text="Opening Date"></asp:Label>
+        </td>
+        <td width="16%">
+            <asp:TextBox ID="Ce_OpeningDate" runat="server" CssClass="twitterStyleTextbox" TabIndex="2" Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_EffectiveDate" runat="server" CssClass="lblCSS" Text="Effective Date"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:TextBox ID="Ce_EffectiveDt" runat="server" TabIndex="3" CssClass="twitterStyleTextbox" Width="96%"></asp:TextBox>
+            <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy" TargetControlID="Ce_EffectiveDt">
+            </asp:CalendarExtender>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_Month" runat="server" CssClass="lblCSS"  
+                 Text="Month"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:TextBox  CssClass="twitterStyleTextbox" ID="Txt_Month" runat="server" AutoPostBack="True"  TabIndex="4"
+                onkeypress="return isFloatKey(event);" style="text-align:right"  
+                Width="96%" MaxLength="3"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="16%">
+            <asp:Label ID="Lbl_Days" runat="server"  CssClass="lblCSS"
+                Text="Days"></asp:Label>
+        </td>
+        <td width="16%">
+            <asp:TextBox  CssClass="twitterStyleTextbox" ID="Txt_Days" TabIndex="5" runat="server" AutoPostBack="True" 
+                onkeypress="return isFloatKey(event);" style="text-align:right"  
+                Width="96%" MaxLength="3"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_DueDate" runat="server" CssClass="lblCSS" Text="Due Date"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:TextBox ID="Ce_DueDate" runat="server" TabIndex="6" CssClass="twitterStyleTextbox" Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_InitialDeposit" runat="server" CssClass="lblCSS" 
+                 Text="Initial Deposit"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:TextBox  CssClass="twitterStyleTextbox" TabIndex="7" ID="Txt_InitialDeposit" runat="server" AutoPostBack="True" 
+                onkeypress="return isFloatKey(event);"  style="text-align:right"  Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="16%">
+            <asp:Label ID="Lbl_InterestPer" runat="server" CssClass="lblCSS" 
+                 Text="Interest %"></asp:Label>
+        </td>
+        <td width="16%">
+            <asp:TextBox  CssClass="twitterStyleTextbox" TabIndex="8" ID="Txt_IntPercent" runat="server" 
+                onkeypress="return isFloatKey(event);" style="text-align:right"  Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_IntPayMode" runat="server" CssClass="lblCSS" Text="Int Pay Mode"></asp:Label>
+        </td>
+        <td width="15%">
+            <asp:DropDownList ID="CmbInterestPayMode" runat="server"  Width="100%" TabIndex="9" >
+            </asp:DropDownList>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            <asp:Label ID="Lbl_MaturityAmt" runat="server"  CssClass="lblCSS"
+                 Text="Maturity Amount"></asp:Label>
+        </td>
+        <td width="15%"> 
+            <asp:TextBox ID="Txt_MaturityAmt" runat="server" CssClass="twitterStyleTextbox"  
+                style="text-align:right" TabIndex="10" Width="96%"></asp:TextBox>
+        </td>
+        <td width="2%">
+                            &nbsp;</td>
+        <td width="16%">
+            <asp:Label ID="Lbl_CashTransfer" runat="server" CssClass="lblCSS"  
+                Text="Cash/Transfer"></asp:Label>
+        </td>
+        <td width="16%">
+            <asp:DropDownList ID="CmbCashTransfer" runat="server" AutoPostBack="True" 
+                 TabIndex="11" 
+                Width="100%">
+            </asp:DropDownList>
+        </td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="2%">
+            &nbsp;</td>
+    </tr>
+    
+    <tr>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="16%">
+            &nbsp;</td>
+        <td width="16%">
+            &nbsp;</td>
+        <td width="2%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="15%">
+            &nbsp;</td>
+        <td width="2%">
+            &nbsp;</td>
+    </tr>
+</table> 
+
+<div id="DivMultipleDep" class="gradientBoxesWithOuterShadows" runat="server" visible="false" style=" float:left; margin-left:2%;margin-right:2%;margin-bottom:2%;margin-top:2%;">
+        <legend>SPLIT A/cs</legend>
+            <table width = "100%">
+	        
+            </table>            
+                <table border="0" width="100%">
+                    <tr>
+                        <td width="2%"></td>
+                        <td width="96%">
+                            <asp:GridView ID="DgvDepDtls" runat="server" AutoGenerateColumns="False"  CssClass="grid-viewNew"
+                                TabIndex="32" Width="100%" DataKeyNames="SlNo">
+                                <Columns>
+                                    <asp:BoundField DataField="Dep_Mth" HeaderText="Month">
+                                       
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_Days" HeaderText="Days">
+                                        
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_DueDt" HeaderText="Due Date">
+                                        
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_Amt" HeaderText="Amount">
+                                       
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_IntRate" HeaderText="Int Rate">
+                                       
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_MatureAmt" HeaderText="Maturity Amt">
+                                        
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_IntPayMode" HeaderText="Int Pay Mode">
+                                       
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_NomNm" HeaderText="Nominee" >
+                                        </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_NomRel" HeaderText="Relation" >
+                                        
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_NomAdd" HeaderText="Address" >
+                                        </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_Standing" HeaderText="Standing Instr" >
+                                         </asp:BoundField>
+                                    <asp:BoundField DataField="Dep_IntPayModeCode" HeaderText="IntPayModeCode" 
+                                        Visible="False" />
+                                    <asp:BoundField DataField="Dep_StndBr" HeaderText="StndBr" Visible="False" />
+                                    <asp:BoundField DataField="Dep_StndSch" HeaderText="StndSch" Visible="False" />
+                                    <asp:BoundField DataField="Dep_StndAccNo" HeaderText="StndAccNo" 
+                                        Visible="False" />
+                                    <asp:BoundField DataField="Dep_NomRelCode" HeaderText="NomRelCode" 
+                                        Visible="False" />
+                                    <asp:CommandField DeleteText="&lt;img src='./images/del.jpg'&gt;" 
+                                        ShowDeleteButton="True">
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:CommandField>
+                                    <asp:BoundField DataField="SlNo" Visible="False" />
+                                </Columns>
+                            </asp:GridView>
+                        <td width="2%"></td>
+                    </tr>
+                   
+                </table>                    
+        </div>
+
+        <table  width="100%" style="float:left;">
+        <tr>
+            <td width="2%">
+            </td>
+            <td width="96%">
+                <asp:GridView ID="DgvTransaction" runat="server" AutoGenerateColumns="False"  CssClass="grid-viewNew"
+                    TabIndex="32" Width="100%">
+                    <Columns>
+                        <asp:BoundField DataField="AccNo" HeaderText="AccNo" Visible="False">
+                           
+                        </asp:BoundField>
+                        <asp:BoundField DataField="AccHead" HeaderText="AccHead">
+                            
+                        </asp:BoundField>
+                        <asp:BoundField DataField="RctCash" HeaderText="Receipt Cash">
+                            
+                        </asp:BoundField>
+                        <asp:BoundField DataField="RctTransfer" HeaderText="Receipt Transfer">
+                           
+                        </asp:BoundField>
+                        <asp:BoundField DataField="PayCash" HeaderText="Payment Cash">
+                            
+                        </asp:BoundField>
+                        <asp:BoundField DataField="PayTransfer" HeaderText="Payment Transfer">
+                            
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Seq_No" HeaderText="Seq_No" Visible="False" />
+                    </Columns>
+                </asp:GridView>
+
+            <td width="2%">
+            </td>
+        </tr>
+            <tr>
+                <td width="2%">
+                    &nbsp;</td>
+                <td width="96%">
+                    <table border="0" width="100%">
+                        <tr>
+                            <td align="right" scope="col" width="40%">
+                                <asp:Label ID="Label1" runat="server" Font-Bold="True" ForeColor="#0033CC" 
+                                    Text="TOTAL"></asp:Label>
+                            </td>
+                            <td align="right" scope="col" width="20%">
+                                <asp:Label ID="LblRctCashTotal" runat="server" Font-Bold="True" 
+                                    ForeColor="#0033CC"></asp:Label>
+                            </td>
+                            <td align="right" scope="col" width="14%">
+                                <asp:Label ID="LblRctTransferTotal" runat="server" Font-Bold="True" 
+                                    ForeColor="#0033CC"></asp:Label>
+                            </td>
+                            <td align="right" scope="col" width="14%">
+                                <asp:Label ID="LblPayCashTotal" runat="server" Font-Bold="True" 
+                                    ForeColor="#0033CC"></asp:Label>
+                            </td>
+                            <td align="right" scope="col" width="12%">
+                                <asp:Label ID="LblPayTransferTotal" runat="server" Font-Bold="True" 
+                                    ForeColor="#0033CC"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="2%">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td width="2%">
+                    &nbsp;</td>
+                <td width="96%" align="center">
+                    <asp:Label ID="LblWords" runat="server" Font-Bold="True" ForeColor="#FF3300"></asp:Label>
+                    <td width="2%">
+                        &nbsp;</td>
+                </td>
+            </tr>
+    </table>
+   </asp:Panel>
+	<table width="100%" style="float:left;">
+	    <tr>
+	    <td width ="25%"></td>
+	    <td width ="50%" align="center">
+                <asp:ImageButton ID="CmdSave" runat="server" ImageUrl="~/images/save.png" 
+                    meta:resourcekey="CmdSaveResource1" TabIndex="34"  />
+                <asp:ImageButton ID="CmdClear" runat="server" ImageUrl="~/images/Close.png" 
+                    meta:resourcekey="CmdClearResource1" TabIndex="35" />
+        </td>
+	    <td width ="25%"> &nbsp;</td>
+	    </tr>
+	</table>
+
+    
+    
+    
+    <div id ="OthDtls" runat="server" visible="false" style="float:left; width:100%" >
+    <table width="100%" style="float:left;">
+    <tr>
+        <td width ="25%"> 
+            <asp:Label ID="Lbl_AutoRenewal" runat="server" CssClass="lblCSS" 
+                Text="Auto Renewal"></asp:Label>
+        </td>
+        <td width ="25%"> 
+            <asp:DropDownList ID="Ddl_AutoRenew" runat="server" 
+                Width="123px">
+                <asp:ListItem Value="Y">Yes</asp:ListItem>
+                <asp:ListItem Value="N">No</asp:ListItem>
+            </asp:DropDownList>
+        </td>
+        <td width ="25%"> 
+            <asp:Label ID="Lbl_MatAccNo" runat="server" CssClass="lblCSS" 
+                Text="Mat Acc No"></asp:Label>
+        </td>
+        <td width ="25%"> 
+            <asp:TextBox ID="Txt_MatAcNo" runat="server" CssClass="twitterStyleTextbox" 
+                TabIndex="27" Width="96%"></asp:TextBox>
+        </td>
+        <td width ="25%"> </td>
+        <td width ="25%"> </td>
+    </tr>
+    <tr>
+        <td> 
+            <asp:Label ID="Lbl_BondNo" runat="server" CssClass="lblCSS"
+                 Text="Bond No"></asp:Label>
+        </td>
+        <td> 
+            <asp:TextBox  CssClass="twitterStyleTextbox" ID="Txt_BondNo" runat="server"></asp:TextBox>
+        </td>
+        <td> 
+            <asp:Label ID="Lbl_ChequeIss" runat="server" CssClass="lblCSS"
+                 Text="Cheque Issue"></asp:Label>
+        </td>
+        <td> 
+            <asp:DropDownList ID="Ddl_ChqIssue" runat="server"  Width="123px">
+                <asp:ListItem Value="Y">Yes</asp:ListItem>
+                <asp:ListItem Value="N">No</asp:ListItem>
+            </asp:DropDownList>
+        </td>
+        <td> </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> 
+            <asp:Label ID="Lbl_Introduceby" runat="server"  CssClass="lblCSS"
+                 Text="Introduced By"></asp:Label>
+        </td>
+        <td> 
+            <asp:TextBox  CssClass="twitterStyleTextbox" ID="Txt_IntroBy" runat="server"></asp:TextBox>
+        </td>
+        <td> 
+            <asp:Label ID="Lbl_Interestupto" runat="server" 
+                 CssClass="lblCSS" Text="Interest Upto"></asp:Label>
+        </td>
+        <td> 
+            <asp:TextBox  CssClass="twitterStyleTextbox" ID="Ce_IntUpto" runat="server"></asp:TextBox>
+        </td>
+        <td> </td>
+        <td> </td>
+    </tr>
+        <tr>
+            <td>
+                <asp:HiddenField ID="SchModuleCatg" runat="server" />
+                <asp:HiddenField ID="SchSection" runat="server" />
+                <asp:HiddenField ID="AgentCollection" runat="server" Value="" />
+                <asp:HiddenField ID="HdnDoublingPeriod" runat="server" Value="" />
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="Lbl_TockenNo" runat="server"  CssClass="lblCSS"
+                     Text="Tocken No" Visible="False"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox  CssClass="twitterStyleTextbox" ID="Txt_TockenNo" runat="server"  Width="96%" TabIndex="26" Visible="false"></asp:TextBox>                 
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+       
+    </table>
+    </div>
+    </div>
+                </ContentTemplate>
+    </asp:UpdatePanel>
+            </asp:Content>
+            
+
+

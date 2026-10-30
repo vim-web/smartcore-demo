@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SMARTCORE_UI", "SMARTCORE_UI.vbproj", "{8C60952A-162F-429B-A7C5-9895AD47DC9E}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SMARTCORE_DAL", "..\SMARTCORE_DAL\SMARTCORE_DAL.vbproj", "{FC2FCB55-50ED-4AFA-B4C2-A1EC76AEA0F6}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SMARTCORE_Common", "..\SMARTCORE_Common\SMARTCORE_Common.vbproj", "{A9EDC9E5-7419-4DE5-82D4-CF57E8464066}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C60952A-162F-429B-A7C5-9895AD47DC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C60952A-162F-429B-A7C5-9895AD47DC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C60952A-162F-429B-A7C5-9895AD47DC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C60952A-162F-429B-A7C5-9895AD47DC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC2FCB55-50ED-4AFA-B4C2-A1EC76AEA0F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2FCB55-50ED-4AFA-B4C2-A1EC76AEA0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC2FCB55-50ED-4AFA-B4C2-A1EC76AEA0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2FCB55-50ED-4AFA-B4C2-A1EC76AEA0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9EDC9E5-7419-4DE5-82D4-CF57E8464066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9EDC9E5-7419-4DE5-82D4-CF57E8464066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9EDC9E5-7419-4DE5-82D4-CF57E8464066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9EDC9E5-7419-4DE5-82D4-CF57E8464066}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

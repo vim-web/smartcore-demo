@@ -1,0 +1,328 @@
+/*
+Design by Metamorphosis Design
+http://www.metamorphozis.com
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+	color: #002b72;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+body {
+	background-color: #7eb9f3;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #000000;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#content{
+	margin: 0 auto;
+	width: 970px;
+	text-align: left;
+}
+
+#main{
+	background-color: #ffffff;
+	width: 964px;
+	margin: 0 auto;
+	clear:both;
+	padding-left:3px;
+	padding-right:3px;
+}
+
+#mainbot{
+	background: url(images/mainbot.jpg) no-repeat bottom left;
+}
+
+#header {
+	width: 970px;
+	height: 297px;
+	background: url(images/header.jpg);
+	background-repeat:no-repeat;
+	background-position: left;
+}
+
+#logo {
+	width: 100%;
+	text-align: right;
+	padding-top: 40px;
+}
+
+
+#logo a {
+	text-decoration: none;
+	text-transform: lowercase;
+	font-style: italic;
+	font-size: 18px;
+	color: #004670;
+	padding-right: 40px;
+}
+
+#logo H2 a{
+	font-size: 12px;
+}
+
+
+#menu{
+	width: 100%;
+	height: 67px;
+	margin: 0 auto;
+	background: url(images/menu.jpg);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+#menu ul {
+	list-style: none;
+	padding-top: 4px;
+	'padding-left: 0px;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu a {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: normal;
+	font-size: 18px;
+	float: left;
+	width: 19.9%;
+	height: 34px;
+	display: block;
+	margin-top:6px;
+	padding-top: 15px;
+}
+
+#menu a:hover{
+	height: 34px;
+	color: #ffffff;
+	font-size: 25px;
+
+}
+
+#left{
+	width: 277px;
+}
+
+#left a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+}
+
+#left .company ul li a{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #328cc3;
+	font-size: 12px;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+#left a:hover{
+	color: #4f9ccb;
+}
+
+#left H3{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	height: 38px;
+	font-weight: normal;
+	padding-top: 10px;
+	color: #ffffff;
+	background: url(images/title_left.jpg);
+	background-repeat:repeat-x;
+	text-align: center;
+}
+
+#left H4{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	padding-top: 10px;
+	color: #4f9ccb;
+	text-align: center;
+}
+
+.hr1{
+	background: url(images/hr1.jpg);
+	background-repeat:no-repeat;
+	background-position: center;
+	height: 1px;
+	width: 100%;
+}
+
+#left ul {
+	list-style: none;
+	padding-left:8px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#left li {
+	background: url(images/ls.jpg) 0px 3px;
+	background-repeat:no-repeat;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	margin-bottom: 3px;
+	margin-left:10px;
+}
+
+#left .company ul {
+	list-style: none;
+	padding-left:8px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#left .company li {
+	background: url(images/ls2.jpg) 0px 3px;
+	background-repeat:no-repeat;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	margin-bottom: 3px;
+	margin-left:10px;
+	padding-top:2px;
+}
+
+#right{
+	float: right;
+	width: 684px;
+}
+
+#right a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:bold;
+	color: #328cc3;
+}
+
+#right a:hover{
+	color: #000000;
+	text-decoration:none;
+}
+
+#right H4{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	height: 38px;
+	font-weight: normal;
+	padding-top: 10px;
+	color: #ffffff;
+	background: url(images/title_right.jpg);
+	background-repeat:repeat-x;
+	text-align: left;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+
+#right H5{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	padding-top: 10px;
+	padding-left: 10px;
+	color: #4f9ccb;
+	text-align: left;
+}
+
+.hr2{
+	background: url(images/hr2.jpg);
+	background-repeat:no-repeat;
+	background-position: center;
+	height: 1px;
+	width: 100%;
+}
+
+#cen{
+	background: url(images/cenbg.jpg) top left;
+	padding-bottom:5px;
+}
+
+#right p {
+	margin: 0;
+	padding: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#right ul li p {
+	padding-left: 0px;
+}
+
+#right ul {
+	list-style: none;
+	padding-left:8px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#right ul li {
+	background: url(images/ls3.jpg) 0px 3px;
+	background-repeat:no-repeat;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	margin-bottom: 3px;
+	padding-top:2px;
+}
+
+#right ul li a{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #328cc3;
+	font-size: 12px;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+#right .read, #left .company ul li .read, #right ul li .read{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: right;
+}
+
+#right .read a, #left .company ul li .read a, #right ul li .read a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #004670;
+	text-decoration: none;
+	border-bottom: 1px dotted #002b72;
+	font-weight:bold;
+	margin-right: 15px;
+}
+
+#footer {
+	height: 46px;
+	clear: both;
+	padding-top: 20px;
+	background: url(images/footer.jpg);
+	background-repeat:no-repeat;
+	background-position:top;
+}
+
+#footer p {
+	margin: 0;
+	font-size: 10px;
+	text-align: center;
+	color: #ffffff;
+}
+
+#footer a {
+	color: #ffffff;
+}

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Application & Appraisal — SMARTCORE Modern UI</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Master Header -->
+    <header class="app-header" id="main-header">
+      <div class="header-left">
+        <button class="nav-toggle" id="sidebar-toggle" aria-label="Toggle navigation" title="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-logo">
+          <img src="../assets/images/logo.svg" alt="SMARTCORE CBS" width="38" height="38">
+          <div class="brand-text">
+            <span class="brand-title">SMARTCORE</span>
+            <span class="brand-sub">Core Banking Solution</span>
+          </div>
+        </div>
+        <span class="cbs-demo-pill" style="margin-left: 10px;" title="Static UI Demonstration — Illustrative Data Only">
+          <span class="cbs-demo-dot"></span> DEMO MODE
+        </span>
+      </div>
+
+      <div class="header-center">
+        <div class="session-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span class="badge-label">BRANCH:</span>
+          <span class="badge-value" id="current-branch-label">MAIN BRANCH (001)</span>
+        </div>
+        <div class="session-badge date-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="badge-label">DATE:</span>
+          <span class="badge-value" id="current-date-label">29-OCT-2026</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" title="Credit Officer">LO</div>
+          <div class="user-info">
+            <span class="user-name">VIMAL (OFFICER)</span>
+            <span class="user-role">CREDIT & ADVANCES DESK</span>
+          </div>
+        </div>
+        <a href="../login.html" class="logout-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container" id="news-ticker-container">
+      <div class="ticker-label">
+        <span class="ticker-dot"></span>
+        CBS ALERTS
+      </div>
+      <div class="ticker-content" id="ticker-content">
+        <span class="ticker-item">Credit Policy Update: Mandatory Field Enquiry Score minimum 75% for unsecured personal loans.</span>
+        <span class="ticker-item">Guarantor CIBIL and Asset-Liability verification must be attached before sanctioning.</span>
+        <span class="ticker-item">Priority Sector Lending targets: Agriculture & MSME applications fast-track eligible.</span>
+      </div>
+      <button class="ticker-toggle-btn" id="ticker-toggle-btn" title="Pause / Play Marquee">⏸</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-body">
+                                                <!-- Sidebar Navigation -->
+      <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link active">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../dashboard.html">SMARTCORE</a></li>
+            <li class="breadcrumb-item">Advances & Credit</li>
+            <li class="breadcrumb-item active">Loan Application</li>
+          </ol>
+          <div class="page-quick-stats">
+            <span class="tag-badge tag-warning">Appraisal Stage</span>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div>
+            <h1 class="page-title">LOAN APPLICATION & APPRAISAL</h1>
+            <p class="page-subtitle">Register credit requests, assess applicant eligibility, manage sureties, field inspection, and appraisal reports (Original: <code>LoanApplication.aspx</code>)</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="btn btn-outline" onclick="CBS.clearForm('loan-form')">Clear</button>
+            <button type="button" class="btn btn-primary" onclick="saveLoanApplication()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save Application
+            </button>
+          </div>
+        </div>
+
+        <form id="loan-form" onsubmit="event.preventDefault(); saveLoanApplication();">
+          <!-- Section 1: Application Header & Scheme -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="card-title">1. Branch & Loan Scheme Details</h2>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-3col">
+                <div class="form-group">
+                  <label for="CmbBranch">Branch <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="text" id="TxtBranch" class="form-control" style="max-width: 80px;" value="001" readonly>
+                    <select id="CmbBranch" class="form-control" required>
+                      <option value="001">MAIN BRANCH (001)</option>
+                      <option value="002">TOWN BRANCH (002)</option>
+                      <option value="003">INDUSTRIAL ESTATE (003)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="TxtApplNo">Application Form No <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="text" id="TxtApplNo" class="form-control font-mono font-bold" value="LA-2026-0842" required>
+                    <button type="button" class="btn btn-secondary" onclick="generateNewAppNo()" title="Auto Next Form No">Auto</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbScheme">Loan Scheme <span class="required">*</span></label>
+                  <div class="input-group">
+                    <input type="text" id="TxtSchCode" class="form-control" style="max-width: 90px;" value="LN-401" readonly>
+                    <select id="CmbScheme" class="form-control" required onchange="onLoanSchemeSelect(this.value)">
+                      <option value="LN-401">LN-401: Gold Loan Express</option>
+                      <option value="LN-402">LN-402: Secured Business Term Loan</option>
+                      <option value="LN-403">LN-403: Agricultural Crop Advance</option>
+                      <option value="LN-404">LN-404: Housing & Property Loan</option>
+                      <option value="LN-405">LN-405: Personal Clean Overdraft</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Applicant Information & Applied Amount -->
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-between align-center">
+              <div>
+                <h2 class="card-title">2. Applicant Particulars & Sanction Request</h2>
+                <span class="text-muted text-small">Primary borrower credentials from Customer Master</span>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="lookupBorrowerModal()">
+                🔍 Lookup Borrower (CUST)
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-3col">
+                <div class="form-group">
+                  <label for="TxtCustIdDisplay">Borrower Customer ID</label>
+                  <input type="text" id="TxtCustIdDisplay" class="form-control font-bold" value="CUST-10492" readonly>
+                </div>
+
+                <div class="form-group span-2">
+                  <label for="TxtName">Applicant Full Name</label>
+                  <input type="text" id="TxtName" class="form-control font-bold" value="RAJESH VERMA" readonly>
+                </div>
+
+                <div class="form-group span-3">
+                  <label for="TxtAddress">Permanent / Residential Address</label>
+                  <textarea id="TxtAddress" class="form-control" rows="2" readonly>24/B, GANDHI MARG, EXTENSION 2, MAIN ROAD, PIN 560001, TEL: 9845012345</textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="TxtIssueDate">Application Date <span class="required">*</span></label>
+                  <input type="text" id="TxtIssueDate" class="form-control" value="29/10/2026" readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="TxtLoanAmt">Loan Amount Applied (₹) <span class="required">*</span></label>
+                  <input type="number" id="TxtLoanAmt" class="form-control text-right font-mono font-bold text-navy text-large" value="350000" step="5000" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="TxtTenureMths">Repayment Tenor (Months)</label>
+                  <input type="number" id="TxtTenureMths" class="form-control text-right" value="36" min="6" max="240">
+                </div>
+              </div>
+
+              <!-- Options Checkboxes from ASPX -->
+              <div class="checkbox-options-bar mt-3 pt-3 border-top">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="ChkRenewal">
+                  <span>Loan Renewal / Top-up</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="ChkSur" checked onchange="toggleGuarantorSection(this.checked)">
+                  <span><strong>Add Guarantor / Surety Details (Mandatory for &gt; ₹1,00,000)</strong></span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="Chkaddmem" onchange="toggleAdditionalMem(this.checked)">
+                  <span>Co-Applicant / Additional Member</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Guarantor & Surety Details (DivSur / DgvCustomer) -->
+          <div class="card mb-4" id="DivSur">
+            <div class="card-header d-flex justify-between align-center">
+              <div>
+                <h2 class="card-title">3. Surety / Guarantor Details (DgvCustomer)</h2>
+                <span class="text-muted text-small">Guarantor liability, net worth, and KYC verification</span>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="openAssetLiabModal()">
+                  📊 Asset & Liability Statement
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addGuarantorPrompt()">
+                  + Add Guarantor
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="DgvCustomer">
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Guarantor Name</th>
+                    <th>Relationship</th>
+                    <th>Address</th>
+                    <th>DOB</th>
+                    <th>Age</th>
+                    <th>Net Worth (Est.)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="guarantor-tbody">
+                  <tr>
+                    <td><strong>CUST-10884</strong></td>
+                    <td><strong>VIKRAM MALHOTRA</strong></td>
+                    <td>BUSINESS PARTNER</td>
+                    <td>12, PALM GROVE ROAD, INDUSTRIAL AREA, PIN 560058</td>
+                    <td>22/03/1979</td>
+                    <td>47 Yrs</td>
+                    <td class="font-mono text-success font-bold">₹ 42,50,000.00</td>
+                    <td>
+                      <button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove(); CBS.showToast('Guarantor removed', 'info')">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 4: Field Enquiry Reports (DivFieldEnq / DgvField) -->
+          <div class="card mb-4" id="DivFieldEnq">
+            <div class="card-header">
+              <h2 class="card-title">4. Field Enquiry & Inspection Report (DgvField)</h2>
+              <span class="text-muted text-small">Pre-sanction inspection, residence verification, and branch scoring points</span>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-4col mb-3">
+                <div class="form-group span-2">
+                  <label for="CmbScore">Inspection Parameter / Score Point</label>
+                  <select id="CmbScore" class="form-control">
+                    <option value="RESIDENCE_VERIFY">Residential Address Verification & Stability (&gt; 5 Yrs)</option>
+                    <option value="BUSINESS_INSPECT">Business Premises Inspection & Stock Verification</option>
+                    <option value="NEIGHBOUR_OPINION">Market Reputation & Neighbour References</option>
+                    <option value="INCOME_PROOF">Income Cash-Flow & Bank Statement Assessment</option>
+                    <option value="COLLATERAL_VAL">Gold / Collateral Physical Verification</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbOpinion">Inspector Opinion / Rating</label>
+                  <select id="CmbOpinion" class="form-control">
+                    <option value="EXCELLENT">EXCELLENT (Satisfactory 100%)</option>
+                    <option value="GOOD">GOOD (Standard Risk)</option>
+                    <option value="AVERAGE">AVERAGE (Requires Additional Surety)</option>
+                    <option value="REJECT">ADVERSE (Not Recommended)</option>
+                  </select>
+                </div>
+
+                <div class="form-group d-flex align-end">
+                  <button type="button" class="btn btn-secondary w-100" id="BtnEnqAdd" onclick="addFieldEnquiryRow()">
+                    + Add Assessment
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table" id="DgvField">
+                  <thead>
+                    <tr>
+                      <th style="width: 50%;">Score Parameter</th>
+                      <th style="width: 35%;">Field Opinion</th>
+                      <th style="width: 15%;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="enquiry-tbody">
+                    <tr>
+                      <td><strong>Residential Address Verification & Stability (&gt; 5 Yrs)</strong></td>
+                      <td><span class="status-badge status-active">EXCELLENT (Satisfactory 100%)</span></td>
+                      <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Business Premises Inspection & Stock Verification</strong></td>
+                      <td><span class="status-badge status-active">GOOD (Standard Risk)</span></td>
+                      <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Documentation Details (DgvDoc) -->
+          <div class="card mb-4" id="DivDoc">
+            <div class="card-header">
+              <h2 class="card-title">5. Documentation & Security Checklist (DgvDoc)</h2>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-3col mb-3">
+                <div class="form-group span-2">
+                  <label for="CmbDocument">Select Loan Document Submitted</label>
+                  <select id="CmbDocument" class="form-control">
+                    <option value="DP_NOTE">Demand Promissory Note (DP Note) stamped</option>
+                    <option value="LOAN_AGREEMENT">Hypothecation / General Loan Agreement</option>
+                    <option value="GUARANTEE_DEED">Deed of Guarantee (Form B-10)</option>
+                    <option value="ITR_3YRS">ITR Acknowledgement & Financials (Last 3 Years)</option>
+                    <option value="SALARY_SLIP">Latest 3 Months Salary Certificate with Form 16</option>
+                    <option value="PROPERTY_TITLE">Title Deed Original & Encumbrance Certificate</option>
+                  </select>
+                </div>
+
+                <div class="form-group d-flex align-end">
+                  <button type="button" class="btn btn-secondary w-100" id="BtnDocAdd" onclick="addDocumentRow()">
+                    + Attach Document
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table" id="DgvDoc">
+                  <thead>
+                    <tr>
+                      <th style="width: 80%;">Document Description</th>
+                      <th style="width: 20%;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="doc-tbody">
+                    <tr>
+                      <td><strong>Demand Promissory Note (DP Note) stamped</strong> - Duly executed with revenue stamp</td>
+                      <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Deed of Guarantee (Form B-10)</strong> - Executed by CUST-10884</td>
+                      <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Additional Co-Applicant (AddMem - Hidden by default) -->
+          <div class="card mb-4" id="AddMem" style="display: none;">
+            <div class="card-header">
+              <h2 class="card-title">6. Co-Applicant / Additional Member Particulars (DgvAdditionalMem)</h2>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="data-table" id="DgvAdditionalMem">
+                  <thead>
+                    <tr>
+                      <th>Customer ID</th>
+                      <th>Name</th>
+                      <th>Relationship</th>
+                      <th>Address</th>
+                      <th>Age</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>CUST-10493</strong></td>
+                      <td>SMT. PRIYA VERMA</td>
+                      <td>CO-APPLICANT (SPOUSE)</td>
+                      <td>24/B, GANDHI MARG, PIN 560001</td>
+                      <td>39 Yrs</td>
+                      <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="CBS.clearForm('loan-form')">Clear Form</button>
+            <a href="../dashboard.html" class="btn btn-secondary">Close</a>
+            <button type="submit" class="btn btn-primary" id="BtnSave">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save Loan Application
+            </button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function toggleGuarantorSection(isChecked) {
+      document.getElementById('DivSur').style.display = isChecked ? 'block' : 'none';
+    }
+
+    function toggleAdditionalMem(isChecked) {
+      document.getElementById('AddMem').style.display = isChecked ? 'block' : 'none';
+    }
+
+    function onLoanSchemeSelect(schemeCode) {
+      document.getElementById('TxtSchCode').value = schemeCode;
+      CBS.showToast('Selected Loan Scheme: ' + schemeCode, 'info');
+    }
+
+    function generateNewAppNo() {
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('TxtApplNo').value = `LA-2026-${randomNum}`;
+      CBS.showToast('New Application Form No generated', 'info');
+    }
+
+    function lookupBorrowerModal() {
+      CBS.showToast('Borrower CUST-10492 profile active and verified against CIBIL score 785.', 'success');
+    }
+
+    function openAssetLiabModal() {
+      CBS.showToast('Guarantor Asset-Liability Statement: Assets ₹55 Lakhs, Liabilities ₹12.5 Lakhs. Net surplus positive.', 'info');
+    }
+
+    function addGuarantorPrompt() {
+      const tbody = document.getElementById('guarantor-tbody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>CUST-10920</strong></td>
+        <td><strong>SURESH CHAWLA</strong></td>
+        <td>BROTHER</td>
+        <td>45, LAKE VIEW ROAD, PIN 560025</td>
+        <td>10/11/1984</td>
+        <td>42 Yrs</td>
+        <td class="font-mono text-success font-bold">₹ 28,00,000.00</td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove(); CBS.showToast('Guarantor removed', 'info')">
+            Remove
+          </button>
+        </td>
+      `;
+      tbody.appendChild(row);
+      CBS.showToast('Added secondary guarantor CUST-10920', 'success');
+    }
+
+    function addFieldEnquiryRow() {
+      const select = document.getElementById('CmbScore');
+      const opinion = document.getElementById('CmbOpinion');
+      const text = select.options[select.selectedIndex].text;
+      const opText = opinion.options[opinion.selectedIndex].text;
+
+      const tbody = document.getElementById('enquiry-tbody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${text}</strong></td>
+        <td><span class="status-badge status-active">${opText}</span></td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+      `;
+      tbody.appendChild(row);
+      CBS.showToast('Field Enquiry Point added', 'success');
+    }
+
+    function addDocumentRow() {
+      const select = document.getElementById('CmbDocument');
+      const text = select.options[select.selectedIndex].text;
+
+      const tbody = document.getElementById('doc-tbody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${text}</strong> - Submitted & verified</td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+      `;
+      tbody.appendChild(row);
+      CBS.showToast('Document record attached', 'success');
+    }
+
+    function saveLoanApplication() {
+      const appNo = document.getElementById('TxtApplNo').value;
+      const amt = parseFloat(document.getElementById('TxtLoanAmt').value).toLocaleString('en-IN');
+      CBS.showToast(`Loan Application ${appNo} for ₹${amt} saved! Dispatched to Manager for Appraisal & Sanction.`, 'success');
+    }
+  </script>
+</body>
+</html>

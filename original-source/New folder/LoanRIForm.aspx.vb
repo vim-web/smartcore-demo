@@ -1,0 +1,280 @@
+﻿Imports SMARTCORE_Common
+Imports SMARTCORE_BL
+Imports SMARTCORE_Common.CommonClass
+Partial Public Class LoanRIForm
+    Inherits System.Web.UI.Page
+    Shared SchemeDt As DataTable
+    Shared AcHeadDt As DataTable
+    Shared Dt_AcDtls As DataTable
+    Public AccHolderTbl As New DataTable("Table")
+    Shared ParameterDt As DataTable
+    Dim FormID As Integer = 1094
+    Shared Obj_UserRights As Object
+
+ 
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Session("UserID") = "" Then
+            Response.Redirect("~/Smartlogin.aspx")
+            Exit Sub
+        End If
+        If Not IsPostBack Then
+            'USer Rights
+            Dim M_Comm As New CommonBL
+            Obj_UserRights = M_Comm.CheckUserRight(Session("LoginUserID").ToString(), FormID)
+            M_Comm = Nothing
+            If Obj_UserRights.View_Right = False Then
+                Response.Redirect("~/UnauthorisedAcces.ASPX")
+            End If
+
+            TxtPifDate.Attributes.Add("readonly", "readonly")
+            Load_DefaultValues()
+            ' Set_Grid()
+        End If
+    End Sub
+    Private Sub Load_DefaultValues()
+
+
+        Dim M_CommonBL As New CommonBL
+        M_CommonBL.Fill_Branch(CmbBranch)
+        M_CommonBL.Fill_Directors(CmbDirector)
+
+        M_CommonBL.Fill_Pickup(CmbAdvocate, 86, 0)
+        M_CommonBL.GetSchemes(CmbScheme, Session("TransDate"), ("LOAN"), "GEN.LOAN','OD")
+        M_CommonBL.GetSchemes(CmbLoanAppType, Session("TransDate"), ("LOAN','LOAN"), "LF','LS")
+        TxtPifDate.Attributes.Add("readonly", "readonly")
+        CmbBranch.SelectedValue = Session("DefaultBrCode")
+        CmbBranch.Enabled = False
+
+        M_CommonBL = Nothing
+        SchemeDt = DirectCast(Session("SchemeTbl"), DataTable)
+
+        AcHeadDt = DirectCast(Cache("Achead"), DataTable)
+
+        Set_SchemeCtrl()
+        GetLoanNo()
+        Call CmbScheme_SelectedIndexChanged(Me.CmbScheme, System.EventArgs.Empty)
+
+
+    End Sub
+    
+
+
+    Protected Sub CmbScheme_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CmbScheme.SelectedIndexChanged
+        Try
+            'TxtSchCode.Text = CmbScheme.SelectedValue
+            Set_SchemeCtrl()
+        Catch ex As Exception
+            ShowAlertMessage(Err.Description)
+        End Try
+    End Sub
+
+    Public Shared Sub ShowAlertMessage(ByVal [error] As String)
+        Dim page As Page = TryCast(HttpContext.Current.Handler, Page)
+        If page IsNot Nothing Then
+            [error] = [error].Replace("'", "`")
+            ScriptManager.RegisterStartupScript(page, page.[GetType](), "err_msg", "alert('" & [error] & "');", True)
+        End If
+    End Sub
+
+
+
+    Private Sub Load_CustomerData()
+        Dim M_CustMaster As New SMARTCORE_BO.CustMasterBO
+        Dim M_PresAddress As New SMARTCORE_BO.CustAddressBO
+        Dim M_PermAddress As New SMARTCORE_BO.CustAddressBO
+        Dim M_CustMasterBL As New CustMasterBL
+
+        ' M_CustMaster = M_CustMasterBL.Locate_Data(Val(HdnSurCustID.Value), M_PresAddress, M_PermAddress)
+        'Locate_Customer(M_CustMaster, M_PresAddress, M_PermAddress)
+        M_CustMasterBL = Nothing
+
+    End Sub
+
+
+
+    Private Sub Set_SchemeCtrl()
+        Try
+
+            Dim locAcHeadTbl As DataTable
+            Dim M_CommonBL As New CommonBL
+            locAcHeadTbl = M_CommonBL.Fill_SchemeHeads(CmbScheme.SelectedValue, "CHARGE")
+            ' DgvTransaction.DataSource = locAcHeadTbl
+            Session("locAcHeadTbl") = locAcHeadTbl
+
+
+            ' DgvTransaction.DataBind()
+
+            Session("SearchScheme") = CmbScheme.SelectedValue
+
+            Dim TempDt As DataTable
+            TempDt = M_CommonBL.Get_SchemeDtls(CmbScheme.SelectedValue)
+            M_CommonBL = Nothing
+        Catch ex As Exception
+            ShowAlertMessage(Err.Description)
+        End Try
+
+    End Sub
+    Protected Sub BtnSave_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles BtnSave.Click
+
+        Try
+
+
+            Dim Dt As Date = TxtRiDate.Text
+            Dim M_LoanApplicationBO As New SMARTCORE_BO.LoanApplicationBO
+            With M_LoanApplicationBO
+
+                .LmID = HdnAccid.Value
+                .LoanType = IIf(CmbLoanAppType.SelectedValue = "LS", "S", "O")
+                .BrCode = CmbBranch.SelectedValue
+                .SchCode = CmbScheme.SelectedValue
+                .LmApplSlno = "0" 'TxtApplnNo.Text
+                .LmLoanSchCode = CmbScheme.SelectedValue
+                .CustId = HdnCustID.Value
+                .ShrAccid = HdnAccid.Value
+                .LmLoanAmount = Val(TxtLoanAmount.Text)
+                .LmDirector = CmbDirector.SelectedValue
+                .LmLoanDate = Session("TransDate")
+                .LmPeriod = "0"
+                .LmPeriodType = "N"
+                .LmHolidayPeriod = "0"
+                .LmHolidayPeriodType = "N"
+                .LmMainpurpose = "0"
+                .LmSubpurpose = "0"
+                .LmResNo = "0"
+                .LmResDate = "01/01/1900"
+                .LmSanctionBy = CmbAdvocate.SelectedValue
+                .LmSanctionNo = "0"
+                .LmSecurityDetails = "0"
+                .LmOperationMode = "0"
+                .LmRemarks = "Nil"
+                .LmInsurance = "0"
+                .LmRegType = "0"
+                .LmRegNo = "0"
+                .LmIntroducedby = "0"
+                .LmStatus = "Y"
+                .LmClosedDate = "01/01/1900"
+                .RecordInspect = Val(txtRiAmt.Text)
+                .RecordDate = Dt
+                .SiteValuate = Val(TxtPropertyValue.Text)
+                .SiteDate = Dt 'Format(Dt, "MM/dd/yyyy")
+                .BoardApproval = "0"
+                .BoradDate = "01/01/1900"
+                .SanctionLetter = "0"
+                .SLetterDate = "01/01/1900"
+                .Disbursement = "0"
+                .DisburseDate = "01/01/1900"
+                .LogID = "0"
+                .MakerID = Session("UserID")
+                .MakingTime = Date.Now
+                .LmRemarks = txt_Remarks.Text.Trim()
+            End With
+
+            Dim M_LoanApplicationBL As New LoanApplicationBL
+            Dim M_Dt As DataTable
+            Session("M_EntryMode") = "RIF"
+
+            M_Dt = M_LoanApplicationBL.Save_Data(M_LoanApplicationBO, Session("M_EntryMode"), "", "")
+
+            ShowAlertMessage(" Updated Successfully")
+
+
+        Catch ex As Exception
+            ShowAlertMessage(ex.ToString())
+        End Try
+        Call ClearMemberDetails()
+
+    End Sub
+
+    Private Sub ClearMemberDetails()
+
+        HdnCustID.Value = Nothing
+        TxtName.Text = ""
+        TxtAddress.Text = ""
+        TxtAmsam.Text = ""
+        TxtDesam.Text = ""
+        TxtMemberno.Text = ""
+        HdnAccid.Value = Nothing
+        TxtLoanAmount.Text = ""
+        TxtPropertyValue.Text = ""
+        txtRiAmt.Text = ""
+        
+    End Sub
+    
+
+    Protected Sub ImageButton2_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton2.Click
+        Call ClearMemberDetails()
+
+    End Sub
+
+    Protected Sub CmbLoanAppType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CmbLoanAppType.SelectedIndexChanged
+        GetLoanNo()
+        ClearMemberDetails()
+    End Sub
+
+    Protected Sub CmbAdvocate_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CmbAdvocate.SelectedIndexChanged
+
+    End Sub
+
+    Protected Sub CmbLoanNo_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CmbLoanNo.SelectedIndexChanged
+        Try
+            Dim Dt_AcDtlsN As DataTable
+            Dim Dt_AccStatus As DataTable
+            Dim M_CommonBL As New CommonBL
+            Dim M_loanAppBL As New LoanApplicationBL
+            Dim dt As New DataTable
+            dt = M_loanAppBL.BranchDetailsDtls(CmbLoanNo.SelectedValue)
+            If CmbBranch.SelectedValue <> Dt.Rows(0)("Br_Code").ToString() Then
+                CmbBranch.SelectedValue = Dt.Rows(0)("Br_Code").ToString()
+            Else
+                CmbBranch.SelectedValue = Dt.Rows(0)("Br_Code").ToString()
+            End If
+            Dt_AcDtlsN = M_CommonBL.GetLoanApplicationDtls(CmbBranch.SelectedValue, CmbLoanNo.SelectedValue, IIf(CmbLoanAppType.SelectedValue = "LS", "S", "O"), Session("TransDate"))
+            If Dt_AcDtlsN.Rows.Count > 0 Then
+
+                Dt_AccStatus = M_loanAppBL.CheckRIFStatus(CmbLoanNo.SelectedValue)
+                If Dt_AccStatus.Rows.Count = 0 Then
+                    Call ClearMemberDetails()
+                    ShowAlertMessage("Record Inspection  is already Entered ")
+                    M_loanAppBL = Nothing
+                    Exit Sub
+                End If
+                HdnCustID.Value = Dt_AcDtlsN.Rows(0)("Cust_ID").ToString()
+                ' Session("CustomerId") = TxtCustID.Text
+                TxtName.Text = Dt_AcDtlsN.Rows(0)("Cust_Name").ToString()
+                TxtAddress.Text = Dt_AcDtlsN.Rows(0)("Cust_Address").ToString()
+                TxtAmsam.Text = Dt_AcDtlsN.Rows(0)("Cust_Amsam").ToString()
+                TxtDesam.Text = Dt_AcDtlsN.Rows(0)("Cust_Desam").ToString()
+
+                HdnAccid.Value = Dt_AcDtlsN.Rows(0)("Shr_Accid").ToString()
+                TxtMemberno.Text = Dt_AcDtlsN.Rows(0)("acc_No").ToString()
+                CmbDirector.SelectedValue = Dt_AcDtlsN.Rows(0)("Lm_Director").ToString()
+                CmbScheme.SelectedValue = Dt_AcDtlsN.Rows(0)("Lm_LoanSchCode").ToString()
+                TxtLoanAmount.Text = Dt_AcDtlsN.Rows(0)("Lm_LoanAmount").ToString()
+                TxtLoanDate.Text = Dt_AcDtlsN.Rows(0)("Lm_LoanDate").ToString()
+                '  CmbLoanAppType.SelectedValue = Dt_AcDtlsN.Rows(0)("Lm_LoanSchCode").ToString()
+                TxtPifDate.Text = Dt_AcDtlsN.Rows(0)("Site_Date").ToString()
+                TxtPropertyValue.Text = Dt_AcDtlsN.Rows(0)("Site_Valuate").ToString()
+            Else
+
+                ShowAlertMessage("Invalid Loan Application Number")
+
+
+                Call ClearMemberDetails()
+
+
+            End If
+
+            M_CommonBL = Nothing
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub GetLoanNo()
+        Dim M_LoanApplicationBL As New LoanApplicationBL
+        M_LoanApplicationBL.GetLoanNo(IIf(CmbLoanAppType.SelectedValue = "LS", "S", "O"), CmbLoanNo)
+        CmbLoanNo.Items.Insert("0", "SELECT")
+        CmbLoanNo.SelectedIndex = "0"
+    End Sub
+End Class

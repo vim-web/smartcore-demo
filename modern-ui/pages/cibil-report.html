@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIBIL Credit Bureau Export — SMARTCORE Modern UI</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Master Header -->
+    <header class="app-header" id="main-header">
+      <div class="header-left">
+        <button class="nav-toggle" id="sidebar-toggle" aria-label="Toggle navigation" title="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-logo">
+          <img src="../assets/images/logo.svg" alt="SMARTCORE CBS" width="38" height="38">
+          <div class="brand-text">
+            <span class="brand-title">SMARTCORE</span>
+            <span class="brand-sub">Core Banking Solution</span>
+          </div>
+        </div>
+        <span class="cbs-demo-pill" style="margin-left: 10px;" title="Static UI Demonstration — Illustrative Data Only">
+          <span class="cbs-demo-dot"></span> DEMO MODE
+        </span>
+      </div>
+
+      <div class="header-center">
+        <div class="session-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span class="badge-label">BRANCH:</span>
+          <span class="badge-value" id="current-branch-label">MAIN BRANCH (001)</span>
+        </div>
+        <div class="session-badge date-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="badge-label">DATE:</span>
+          <span class="badge-value" id="current-date-label">29-OCT-2026</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" title="MIS & Analytics Officer">MIS</div>
+          <div class="user-info">
+            <span class="user-name">MIS OFFICER</span>
+            <span class="user-role">AUDIT & REGULATORY REPORTING</span>
+          </div>
+        </div>
+        <a href="../login.html" class="logout-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container" id="news-ticker-container">
+      <div class="ticker-label">
+        <span class="ticker-dot"></span>
+        CBS ALERTS
+      </div>
+      <div class="ticker-content" id="ticker-content">
+        <span class="ticker-item">Credit Bureau Reporting: Monthly data export validated against TUDF v2.0 statutory schema.</span>
+        <span class="ticker-item">Core Reporting Engine: Real-time queries run against indexed reporting views without locking transactional counters.</span>
+      </div>
+      <button class="ticker-toggle-btn" id="ticker-toggle-btn" title="Pause / Play Marquee">⏸</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-body">
+                              <!-- Sidebar Navigation -->
+      <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link active">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../dashboard.html">SMARTCORE</a></li>
+            <li class="breadcrumb-item">Core CBS Reports</li>
+            <li class="breadcrumb-item active">CIBIL Bureau Export</li>
+          </ol>
+          <div class="page-quick-stats">
+            <span class="tag-badge tag-info">Credit Bureau File Generation</span>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div>
+            <h1 class="page-title">CIBIL CREDIT INFORMATION BUREAU REPORT & FILE EXPORT</h1>
+            <p class="page-subtitle">Generate statutory monthly credit bureau files for CIBIL, Equifax, Experian, and CRIF High Mark (Original: CibilReport.aspx)</p>
+          </div>
+        </div>
+
+        <!-- Demo Mode Notice -->
+        <div class="demo-disclaimer-bar">
+          <span style="font-weight: 700; color: var(--gold-600);">DEMO ENVIRONMENT:</span>
+          <span>Sample core banking analytics and operational reporting records shown below for static UI evaluation. No production banking database is connected.</span>
+        </div>
+
+        <!-- CIBIL Filter Card -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-header">
+            <div class="card-title">Credit Bureau Reporting File Specifications</div>
+            <span class="demo-data-badge">Illustrative Bureau Output</span>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: flex-end;">
+              <div class="form-group">
+                <label class="form-label" for="ddlReportType">Report Type (DDL_ReportType)</label>
+                <select id="ddlReportType" class="form-select">
+                  <option selected>CYBIL GL (Consumer Bureau File - TUDF format)</option>
+                  <option>CYBIL EMI (Commercial Bureau File)</option>
+                  <option>OS TYPE2 (Microfinance & Group Loan File)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="txtAsOnDate">As on Date (TxtAsOnDate)</label>
+                <input type="date" id="txtAsOnDate" class="form-control" value="2026-10-29">
+              </div>
+
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn btn-primary" onclick="CBS.showToast('CIBIL batch generation completed', 'success')">Generate CIBIL File</button>
+                <button type="button" class="btn btn-secondary" onclick="CBS.showToast('Downloaded CIBIL_TUDF_202610.txt', 'info')">Download .TXT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CIBIL Verification Grid (GridView1) -->
+        <div class="card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card-title">Extracted Bureau Records Preview (GridView1)</div>
+            <span style="font-weight: 700; color: var(--navy-800);">Total Validated Records: 845 Borrowers</span>
+          </div>
+          <div class="card-body" style="padding: 0; overflow-x: auto;">
+            <table class="data-table" id="cibil-table">
+              <thead>
+                <tr>
+                  <th>Member No</th>
+                  <th>Customer ID</th>
+                  <th>Borrower Name</th>
+                  <th>PAN Card</th>
+                  <th>Account No</th>
+                  <th>Sanction Amt (₹)</th>
+                  <th>Current Balance (₹)</th>
+                  <th>DPD (Days Past Due)</th>
+                  <th>Bureau Score</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">M-4081</td>
+                  <td>CUST-88120</td>
+                  <td>Sunita Ramesh Patil</td>
+                  <td style="font-family: var(--font-mono);">BKRPP4821N</td>
+                  <td style="font-family: var(--font-mono);">GL-10481</td>
+                  <td style="text-align: right;">3,50,000.00</td>
+                  <td style="text-align: right; font-weight: 700;">3,50,000.00</td>
+                  <td><span class="badge badge-success">0 DPD</span></td>
+                  <td><span class="badge badge-success">762</span></td>
+                  <td><span class="badge badge-success">VALIDATED</span></td>
+                </tr>
+                <tr>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">M-2890</td>
+                  <td>CUST-66210</td>
+                  <td>Deepak Narayan Shinde</td>
+                  <td style="font-family: var(--font-mono);">AFDPS1109M</td>
+                  <td style="font-family: var(--font-mono);">LN-2023-00412</td>
+                  <td style="text-align: right;">2,00,000.00</td>
+                  <td style="text-align: right; font-weight: 700; color: var(--danger);">1,84,200.00</td>
+                  <td><span class="badge badge-danger">122 DPD</span></td>
+                  <td><span class="badge badge-warning">618</span></td>
+                  <td><span class="badge badge-warning">NPA FLAGGED</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+          </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

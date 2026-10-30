@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60" fill="none">
+  <!-- Background Shield Emblem -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e5bb8"/>
+      <stop offset="100%" stop-color="#0a2540"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield Icon -->
+  <g transform="translate(6, 6)">
+    <path d="M24 2 L44 9.5 V24 C44 35.5 35.5 45.5 24 48 C12.5 45.5 4 35.5 4 24 V9.5 L24 2 Z" fill="url(#shieldGrad)" stroke="#2563eb" stroke-width="1.5"/>
+    <!-- Inner Core & Pillars -->
+    <path d="M24 7 L39 12.5 V23 C39 32 32.5 40 24 42.5 C15.5 40 9 32 9 23 V12.5 L24 7 Z" fill="#0f2b48" opacity="0.6"/>
+    <rect x="16" y="19" width="3.5" height="15" rx="1" fill="url(#goldGrad)"/>
+    <rect x="22.25" y="16" width="3.5" height="18" rx="1" fill="#ffffff"/>
+    <rect x="28.5" y="19" width="3.5" height="15" rx="1" fill="url(#goldGrad)"/>
+    <path d="M14 36 H34 V38 H14 Z" fill="url(#goldGrad)"/>
+    <path d="M14 17 L24 11 L34 17 Z" fill="url(#goldGrad)"/>
+  </g>
+  
+  <!-- Text Branding -->
+  <text x="64" y="32" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif" font-size="22" font-weight="800" letter-spacing="1.5" fill="#ffffff">SMART<tspan fill="#f59e0b">CORE</tspan></text>
+  <text x="65" y="46" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.5" fill="#93c5fd">CORE BANKING SOLUTION</text>
+</svg>

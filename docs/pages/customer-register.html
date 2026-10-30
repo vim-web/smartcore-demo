@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMARTCORE CBS — Customer Register</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Master Header -->
+  <header class="cbs-header">
+    <div class="cbs-brand">
+      <button class="cbs-menu-toggle" aria-label="Toggle Navigation">&#9776;</button>
+      <a href="../dashboard.html" style="display: flex; align-items: center;">
+        <img src="../assets/images/logo.svg" alt="SMARTCORE CBS Logo" class="cbs-logo-img">
+      </a>
+      <span class="cbs-demo-pill" title="Static UI Demonstration — Illustrative Data Only">
+        <span class="cbs-demo-dot"></span> DEMO MODE
+      </span>
+    </div>
+
+    <div class="cbs-top-right">
+      <div class="cbs-header-info">
+        <div class="cbs-info-item">
+          <span class="cbs-info-label">Branch</span>
+          <span class="cbs-info-val">001 — MAIN CORPORATE BRANCH</span>
+        </div>
+        <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.15);"></div>
+        <div class="cbs-info-item">
+          <span class="cbs-info-label">Banking Date</span>
+          <span class="cbs-info-val">29/10/2026</span>
+        </div>
+      </div>
+
+      <div class="cbs-user-chip">
+        <div class="cbs-avatar">AD</div>
+        <div class="cbs-user-text">
+          <span class="cbs-user-name">ADMIN (USR104)</span>
+          <span class="cbs-user-role">Branch Manager</span>
+        </div>
+      </div>
+
+      <a href="../dashboard.html" class="cbs-icon-btn" title="Dashboard Home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <a href="../login.html" class="cbs-logout-btn" title="Logout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Logout</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- News Ticker -->
+  <div class="cbs-ticker-bar">
+    <div class="cbs-ticker-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <span>Customer KYC Updates</span>
+    </div>
+    <div class="cbs-ticker-content">
+      <div class="cbs-ticker-text">
+        KYC Compliance: Verify Aadhaar/PAN details for newly enrolled members &nbsp;&bull;&nbsp; 
+        Customer 15-H submissions accepted until 31st of month &nbsp;&bull;&nbsp; 
+        Photo and biometric capture mandatory for Gold Loan borrowers
+      </div>
+    </div>
+    <div class="cbs-ticker-controls">
+      <button class="cbs-ticker-btn" id="btnTickerPlayPause" title="Pause / Resume">&#10074;&#10074;</button>
+    </div>
+  </div>
+
+  <!-- Layout Body -->
+  <div class="cbs-app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link active">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <main class="cbs-main">
+      <div class="cbs-page-header">
+        <div class="cbs-breadcrumb-group">
+          <div class="cbs-breadcrumb">
+            <a href="../dashboard.html">SMARTCORE CBS</a>
+            <span>/</span>
+            <a href="#">Customer Module</a>
+            <span>/</span>
+            <span>Customer Register</span>
+          </div>
+          <h1 class="cbs-page-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy-600)" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            Customer Master & KYC Registration
+          </h1>
+        </div>
+
+        <div class="cbs-page-actions">
+          <button type="button" class="btn btn-secondary" onclick="CBS.openModal('photoUploadModal');">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Upload Photo / Webcam
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="CBS.confirmClearForm('custRegForm');">
+            Clear
+          </button>
+          <button type="button" class="btn btn-primary" onclick="CBS.demoSave('Customer #10842');">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save Customer
+          </button>
+        </div>
+      </div>
+
+      <form id="custRegForm" onsubmit="event.preventDefault(); CBS.demoSave('Customer');">
+        
+        <!-- Section 1: Customer Personal Profile -->
+        <div class="cbs-card">
+          <div class="cbs-card-header">
+            <div class="cbs-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              Basic Identification & Profile
+            </div>
+            <span class="badge badge-navy">Mandatory KYC Data</span>
+          </div>
+
+          <div class="cbs-card-body">
+            <div class="form-grid">
+              
+              <!-- Customer ID & Admission Branch -->
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtCustID">Customer ID</label>
+                <div class="input-with-button">
+                  <input type="text" id="TxtCustID" class="form-control mono" value="CUST-10842" placeholder="Auto / Search">
+                  <button type="button" class="search-lookup-btn" title="Search existing customer" onclick="CBS.showToast('Customer record loaded: K. Radhakrishnan', 'info');">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbAdmBranch">Admission Branch <span class="req">*</span></label>
+                <select id="CmbAdmBranch" class="form-control" required>
+                  <option value="001" selected>001 — MAIN BRANCH</option>
+                  <option value="002">002 — CITY COMMERCIAL BRANCH</option>
+                  <option value="003">003 — WEST END BRANCH</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtDoa">Admission Date</label>
+                <input type="text" id="TxtDoa" class="form-control mono" value="29/10/2026">
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbOccupation">Occupation</label>
+                <select id="CmbOccupation" class="form-control">
+                  <option value="SALARIED" selected>Salaried Employee / Govt</option>
+                  <option value="BUSINESS">Business / Self-Employed</option>
+                  <option value="AGRICULTURE">Farmer / Agriculture</option>
+                  <option value="PROFESSIONAL">Doctor / Lawyer / CA</option>
+                  <option value="RETIRED">Retired / Pensioner</option>
+                  <option value="HOUSEWIFE">Homemaker</option>
+                </select>
+              </div>
+
+              <!-- Customer Type & Category -->
+              <div class="col-3 form-group">
+                <label class="form-label" for="cmbCustomerType">Customer Type <span class="req">*</span></label>
+                <select id="cmbCustomerType" class="form-control" required>
+                  <option value="INDIVIDUAL" selected>Individual</option>
+                  <option value="JOINT">Joint Account Holders</option>
+                  <option value="PROPRIETOR">Sole Proprietorship</option>
+                  <option value="MINOR">Minor Account (with Guardian)</option>
+                  <option value="SENIOR">Senior Citizen Priority</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbCustomerCatg">Customer Category</label>
+                <select id="CmbCustomerCatg" class="form-control">
+                  <option value="GENERAL" selected>General Public</option>
+                  <option value="MEMBER">Bank Share Member (Class A)</option>
+                  <option value="STAFF">Bank Employee / Staff</option>
+                  <option value="DIRECTOR">Board Member / Director</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbEducation">Education</label>
+                <select id="CmbEducation" class="form-control">
+                  <option value="GRADUATE" selected>Graduate / Post Graduate</option>
+                  <option value="SECONDARY">Higher Secondary</option>
+                  <option value="PRIMARY">Secondary / Below</option>
+                  <option value="OTHER">Others</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbMaritialStatus">Marital Status</label>
+                <select id="CmbMaritialStatus" class="form-control">
+                  <option value="MARRIED" selected>Married</option>
+                  <option value="SINGLE">Single</option>
+                  <option value="OTHER">Widowed / Separated</option>
+                </select>
+              </div>
+
+              <!-- Name & Gender -->
+              <div class="col-6 form-group">
+                <label class="form-label" for="TxtName">Full Name <span class="req">*</span></label>
+                <div style="display: flex; gap: 8px;">
+                  <select id="CmbTitle" class="form-control" style="width: 100px;">
+                    <option value="MR" selected>Mr.</option>
+                    <option value="MRS">Mrs.</option>
+                    <option value="MS">Ms.</option>
+                    <option value="DR">Dr.</option>
+                  </select>
+                  <input type="text" id="TxtName" class="form-control" value="RADHAKRISHNAN K." placeholder="As per PAN or Aadhaar" required style="text-transform: uppercase;">
+                </div>
+              </div>
+
+              <div class="col-2 form-group">
+                <label class="form-label" for="CmbGender">Gender <span class="req">*</span></label>
+                <select id="CmbGender" class="form-control" required>
+                  <option value="MALE" selected>Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="TRANSGENDER">Other</option>
+                </select>
+              </div>
+
+              <div class="col-2 form-group">
+                <label class="form-label" for="TxtDob">Date of Birth <span class="req">*</span></label>
+                <input type="text" id="TxtDob" class="form-control mono" value="15/06/1982" placeholder="DD/MM/YYYY" required>
+              </div>
+
+              <div class="col-2 form-group">
+                <label class="form-label" for="TxtAge">Age (Years)</label>
+                <input type="number" id="TxtAge" class="form-control mono" value="44" readonly>
+              </div>
+
+              <!-- Relative Information -->
+              <div class="col-4 form-group">
+                <label class="form-label" for="TxtRelName">Relative Name</label>
+                <div style="display: flex; gap: 8px;">
+                  <select id="CmbRelType" class="form-control" style="width: 100px;">
+                    <option value="FATHER" selected>Father</option>
+                    <option value="HUSBAND">Husband</option>
+                    <option value="MOTHER">Mother</option>
+                    <option value="SPOUSE">Spouse</option>
+                  </select>
+                  <input type="text" id="TxtRelName" class="form-control" value="KRISHNAN NAIR" style="text-transform: uppercase;">
+                </div>
+              </div>
+
+              <div class="col-4 form-group">
+                <label class="form-label" for="TxtMotherName">Mother Name</label>
+                <input type="text" id="TxtMotherName" class="form-control" value="SAROJINI AMMA" style="text-transform: uppercase;">
+              </div>
+
+              <div class="col-4 form-group">
+                <label class="form-label" for="CmbReligion">Religion & Caste</label>
+                <div style="display: flex; gap: 8px;">
+                  <select id="CmbReligion" class="form-control">
+                    <option value="HINDU" selected>Hindu</option>
+                    <option value="CHRISTIAN">Christian</option>
+                    <option value="MUSLIM">Muslim</option>
+                    <option value="OTHER">Others</option>
+                  </select>
+                  <input type="text" id="CmbMainCaste" class="form-control" value="General" placeholder="Caste category">
+                </div>
+              </div>
+
+              <!-- Introducer Details -->
+              <div class="col-6 form-group">
+                <label class="form-label" for="TxtIntroID">Introduced By (Existing Customer) <span class="req">*</span></label>
+                <div class="input-with-button">
+                  <input type="text" id="TxtIntroID" class="form-control mono" style="max-width: 130px;" value="CUST-00412" placeholder="Member ID">
+                  <input type="text" id="TxtIntroNm" class="form-control" value="V. M. SREEDHARAN" placeholder="Introducer Name" readonly>
+                  <button type="button" class="search-lookup-btn" title="Lookup Introducer" onclick="CBS.showToast('Introducer verified: A/C active since 2018', 'success');">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbBloodGrp">Blood Group</label>
+                <select id="CmbBloodGrp" class="form-control">
+                  <option value="O+">O Rh+</option>
+                  <option value="A+" selected>A Rh+</option>
+                  <option value="B+">B Rh+</option>
+                  <option value="AB+">AB Rh+</option>
+                  <option value="O-">O Rh-</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbSubCaste">Financial Status</label>
+                <select id="CmbSubCaste" class="form-control">
+                  <option value="MIDDLE" selected>Middle Income Group</option>
+                  <option value="HIGHER">Higher Income Group</option>
+                  <option value="LOWER">Low Income Group</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Minor Guardian Details (conditionally displayed if Age < 18 or Minor selected) -->
+        <div id="GuardianDiv" class="cbs-card" style="display: none; border-left: 4px solid var(--warning); background: #fffdf5;">
+          <div class="cbs-card-header" style="background: transparent;">
+            <div class="cbs-card-title" style="color: var(--warning);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              Minor Account — Legal Guardian Details
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('GuardianDiv').style.display='none';">Hide</button>
+          </div>
+          <div class="cbs-card-body">
+            <div class="form-grid">
+              <div class="col-4 form-group">
+                <label class="form-label" for="TxtGuardianID">Guardian Cust ID</label>
+                <input type="text" id="TxtGuardianID" class="form-control mono" placeholder="CUST-xxxxx">
+              </div>
+              <div class="col-5 form-group">
+                <label class="form-label" for="TxtGuardianNm">Guardian Full Name</label>
+                <input type="text" id="TxtGuardianNm" class="form-control" placeholder="Guardian Legal Name">
+              </div>
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbGuardianRel">Relationship to Minor</label>
+                <select id="CmbGuardianRel" class="form-control">
+                  <option value="FATHER">Natural Father</option>
+                  <option value="MOTHER">Natural Mother</option>
+                  <option value="LEGAL">Court Appointed Guardian</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Dual Address Verification (Original Address Panel & Copy Button) -->
+        <div class="cbs-card">
+          <div class="cbs-card-header">
+            <div class="cbs-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Residential & Communication Addresses
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="CBS.copyPresentAddress();" title="Copy Present Address to Permanent Address">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Present &rarr; Permanent
+            </button>
+          </div>
+
+          <div class="cbs-card-body">
+            <div class="form-grid">
+              
+              <!-- Present Address Column -->
+              <div class="col-6" style="border-right: 1px solid var(--border); padding-right: 16px;">
+                <div style="font-weight: 700; color: var(--navy-800); margin-bottom: 12px; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+                  <span class="badge badge-navy">PRESENT ADDRESS</span>
+                  <span style="font-size: 11px; color: var(--slate-500); font-weight: normal;">Current residence for communications</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPresHouseNo">House / Door No.</label>
+                    <input type="text" id="TxtPresHouseNo" class="form-control" value="14/282-B">
+                  </div>
+                  <div class="col-8 form-group">
+                    <label class="form-label" for="TxtPresHouseName">House / Building Name <span class="req">*</span></label>
+                    <input type="text" id="TxtPresHouseName" class="form-control" value="SREEKRISHNA VILASAM" required style="text-transform: uppercase;">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPresPlace">Post Office / Street <span class="req">*</span></label>
+                    <input type="text" id="TxtPresPlace" class="form-control" value="FORT PO, PALAKKAD" required style="text-transform: uppercase;">
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPresward">Ward No.</label>
+                    <input type="text" id="TxtPresward" class="form-control" value="Ward 12">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPrespancynt">Panchayath / Municipality</label>
+                    <input type="text" id="TxtPrespancynt" class="form-control" value="Palakkad Municipality">
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="txtPresvillage">Village</label>
+                    <input type="text" id="txtPresvillage" class="form-control" value="Palakkad-I">
+                  </div>
+
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPrestaluk">Taluk</label>
+                    <input type="text" id="TxtPrestaluk" class="form-control" value="Palakkad">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPresDist">District</label>
+                    <input type="text" id="TxtPresDist" class="form-control" value="Palakkad">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPresState">State</label>
+                    <input type="text" id="TxtPresState" class="form-control" value="Kerala">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPresPin">PIN Code <span class="req">*</span></label>
+                    <input type="text" id="TxtPresPin" class="form-control mono" value="678001" maxlength="6" required>
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPresLand">Landline Phone</label>
+                    <input type="text" id="TxtPresLand" class="form-control mono" value="0491-2521400">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Permanent Address Column -->
+              <div class="col-6" style="padding-left: 8px;">
+                <div style="font-weight: 700; color: var(--navy-800); margin-bottom: 12px; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+                  <span class="badge badge-navy">PERMANENT ADDRESS</span>
+                  <span style="font-size: 11px; color: var(--slate-500); font-weight: normal;">Permanent domicile record</span>
+                </div>
+
+                <div class="form-grid">
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPermHouseNo">House / Door No.</label>
+                    <input type="text" id="TxtPermHouseNo" class="form-control" value="14/282-B">
+                  </div>
+                  <div class="col-8 form-group">
+                    <label class="form-label" for="TxtPermHouseName">House / Building Name <span class="req">*</span></label>
+                    <input type="text" id="TxtPermHouseName" class="form-control" value="SREEKRISHNA VILASAM" required style="text-transform: uppercase;">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPermPlace">Post Office / Street <span class="req">*</span></label>
+                    <input type="text" id="TxtPermPlace" class="form-control" value="FORT PO, PALAKKAD" required style="text-transform: uppercase;">
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPremward">Ward No.</label>
+                    <input type="text" id="TxtPremward" class="form-control" value="Ward 12">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPrempancynt">Panchayath / Municipality</label>
+                    <input type="text" id="TxtPrempancynt" class="form-control" value="Palakkad Municipality">
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPermvillage">Village</label>
+                    <input type="text" id="TxtPermvillage" class="form-control" value="Palakkad-I">
+                  </div>
+
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPermtaluk">Taluk</label>
+                    <input type="text" id="TxtPermtaluk" class="form-control" value="Palakkad">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPermDist">District</label>
+                    <input type="text" id="TxtPermDist" class="form-control" value="Palakkad">
+                  </div>
+                  <div class="col-4 form-group">
+                    <label class="form-label" for="TxtPermState">State</label>
+                    <input type="text" id="TxtPermState" class="form-control" value="Kerala">
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPermPin">PIN Code <span class="req">*</span></label>
+                    <input type="text" id="TxtPermPin" class="form-control mono" value="678001" maxlength="6" required>
+                  </div>
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtPermLand">Landline Phone</label>
+                    <input type="text" id="TxtPermLand" class="form-control mono" value="0491-2521400">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Contact & Identity Proofs (KYC) -->
+        <div class="cbs-card">
+          <div class="cbs-card-header">
+            <div class="cbs-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Contact Information & Regulatory KYC Documentation
+            </div>
+            <span class="badge badge-success">OTP Verified</span>
+          </div>
+
+          <div class="cbs-card-body">
+            <div class="form-grid">
+              
+              <!-- Contact Details & OTP -->
+              <div class="col-4 form-group">
+                <label class="form-label" for="TxtMobile">Mobile Number <span class="req">*</span></label>
+                <div class="input-with-button">
+                  <input type="tel" id="TxtMobile" class="form-control mono" value="9847012345" maxlength="10" required>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="CBS.openModal('otpVerifyModal');">
+                    Verify OTP
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-5 form-group">
+                <label class="form-label" for="TxtEmail">Email Address</label>
+                <input type="email" id="TxtEmail" class="form-control" value="radhakrishnan.k@example.com" placeholder="name@domain.com">
+              </div>
+
+              <div class="col-3 form-group" style="justify-content: flex-end; padding-bottom: 6px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; cursor: pointer;">
+                  <input type="checkbox" id="chkSmsAlert" checked style="width: 16px; height: 16px;">
+                  <span>Enable SMS Alert Services</span>
+                </label>
+              </div>
+
+              <!-- Photo ID Proof -->
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbPhotoIDProof">Photo Identity Proof <span class="req">*</span></label>
+                <select id="CmbPhotoIDProof" class="form-control" required>
+                  <option value="PAN" selected>Income Tax PAN Card</option>
+                  <option value="AADHAAR">UIDAI Aadhaar Card</option>
+                  <option value="VOTER">Election Voter ID</option>
+                  <option value="PASSPORT">Indian Passport</option>
+                  <option value="DRIVING">Driving License</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtPhotoIDNoProof">ID Document Number <span class="req">*</span></label>
+                <input type="text" id="TxtPhotoIDNoProof" class="form-control mono" value="ABCDE1234F" style="text-transform: uppercase;" required>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtPhotoIssAuth">Issuing Authority</label>
+                <input type="text" id="TxtPhotoIssAuth" class="form-control" value="Govt of India (IT Dept)">
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtPhotoExpiryDate">Expiry / Validity Date</label>
+                <input type="text" id="TxtPhotoExpiryDate" class="form-control mono" value="PERMANENT">
+              </div>
+
+              <!-- Address Proof -->
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbAddProof">Address Proof Document <span class="req">*</span></label>
+                <select id="CmbAddProof" class="form-control" required>
+                  <option value="AADHAAR" selected>UIDAI Aadhaar Card</option>
+                  <option value="PASSPORT">Indian Passport</option>
+                  <option value="VOTER">Election Voter ID</option>
+                  <option value="EBILL">Electricity Bill (within 3 mos)</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtAddProofNo">Address Proof Doc No <span class="req">*</span></label>
+                <input type="text" id="TxtAddProofNo" class="form-control mono" value="4829-1029-4820" required>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtAddIssAuth">Issuing Authority</label>
+                <input type="text" id="TxtAddIssAuth" class="form-control" value="UIDAI">
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtAddRemarks">KYC Verification Remarks</label>
+                <input type="text" id="TxtAddRemarks" class="form-control" value="Original documents verified by Teller">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="cbs-card-footer">
+            <button type="button" class="btn btn-secondary" onclick="CBS.confirmClearForm('custRegForm');">
+              Reset Fields
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.print();">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print KYC Form
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+              Save Customer Details
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </main>
+  </div>
+
+  <!-- OTP Verification Modal (Original VerifyMob Popup) -->
+  <div class="cbs-modal-overlay" id="otpVerifyModal">
+    <div class="cbs-modal-card" style="max-width: 420px;">
+      <div class="cbs-modal-header">
+        <div class="cbs-modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Mobile OTP Verification
+        </div>
+        <button class="cbs-modal-close" onclick="CBS.closeModal('otpVerifyModal')">&times;</button>
+      </div>
+      <div class="cbs-modal-body" style="text-align: center;">
+        <p style="font-size: 13px; color: var(--slate-600); margin-bottom: 16px;">
+          A 6-digit one-time code has been dispatched to <strong>+91 9847012345</strong>.
+        </p>
+        <div class="form-group" style="max-width: 200px; margin: 0 auto 16px;">
+          <input type="text" id="txt_verifycode" class="form-control mono text-center" value="842910" style="font-size: 18px; letter-spacing: 4px;" maxlength="6">
+        </div>
+        <span class="badge badge-success">Demo OTP Pre-Filled</span>
+      </div>
+      <div class="cbs-modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="CBS.closeModal('otpVerifyModal')">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="CBS.closeModal('otpVerifyModal'); CBS.showToast('Mobile number 9847012345 verified successfully!', 'success');">
+          Verify Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo / Webcam Capture Modal (Original popup_Document & IMG_Upload.aspx) -->
+  <div class="cbs-modal-overlay" id="photoUploadModal">
+    <div class="cbs-modal-card" style="max-width: 520px;">
+      <div class="cbs-modal-header">
+        <div class="cbs-modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Customer Photo / Biometric Capture
+        </div>
+        <button class="cbs-modal-close" onclick="CBS.closeModal('photoUploadModal')">&times;</button>
+      </div>
+      <div class="cbs-modal-body" style="text-align: center;">
+        <div style="width: 180px; height: 220px; margin: 0 auto 16px; background: var(--slate-100); border: 2px dashed var(--slate-300); border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--slate-500);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size: 11px; margin-top: 8px;">Passport Photo (35 x 45mm)</span>
+        </div>
+        <div class="form-group" style="max-width: 300px; margin: 0 auto;">
+          <select id="Ddl_phototype" class="form-control">
+            <option value="Photo" selected>Customer Photograph</option>
+            <option value="Signature">Customer Specimen Signature</option>
+            <option value="Aadhaar">Aadhaar Card Scan</option>
+            <option value="Pancard">PAN Card Scan</option>
+          </select>
+        </div>
+      </div>
+      <div class="cbs-modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="CBS.closeModal('photoUploadModal')">Close</button>
+        <button type="button" class="btn btn-primary" onclick="CBS.closeModal('photoUploadModal'); CBS.showToast('Photograph attached to customer record.', 'success');">
+          Simulate Camera Capture
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

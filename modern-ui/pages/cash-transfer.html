@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMARTCORE CBS — Cash / Fund Transfer</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Master Header -->
+  <header class="cbs-header">
+    <div class="cbs-brand">
+      <button class="cbs-menu-toggle" aria-label="Toggle Navigation">&#9776;</button>
+      <a href="../dashboard.html" style="display: flex; align-items: center;">
+        <img src="../assets/images/logo.svg" alt="SMARTCORE CBS Logo" class="cbs-logo-img">
+      </a>
+      <span class="cbs-demo-pill" title="Static UI Demonstration — Illustrative Data Only">
+        <span class="cbs-demo-dot"></span> DEMO MODE
+      </span>
+    </div>
+
+    <div class="cbs-top-right">
+      <div class="cbs-header-info">
+        <div class="cbs-info-item">
+          <span class="cbs-info-label">Branch</span>
+          <span class="cbs-info-val">001 — MAIN CORPORATE BRANCH</span>
+        </div>
+        <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.15);"></div>
+        <div class="cbs-info-item">
+          <span class="cbs-info-label">Banking Date</span>
+          <span class="cbs-info-val">29/10/2026</span>
+        </div>
+      </div>
+
+      <div class="cbs-user-chip">
+        <div class="cbs-avatar">AD</div>
+        <div class="cbs-user-text">
+          <span class="cbs-user-name">ADMIN (USR104)</span>
+          <span class="cbs-user-role">Branch Manager</span>
+        </div>
+      </div>
+
+      <a href="../dashboard.html" class="cbs-icon-btn" title="Dashboard Home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <a href="../login.html" class="cbs-logout-btn" title="Logout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Logout</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- News Ticker -->
+  <div class="cbs-ticker-bar">
+    <div class="cbs-ticker-tag">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <span>Fund Transfer Settlement</span>
+    </div>
+    <div class="cbs-ticker-content">
+      <div class="cbs-ticker-text">
+        Inter-Account Transfers balance automatically (Debit Total = Credit Total) &nbsp;&bull;&nbsp; 
+        Inter-Branch fund transfers settle instantly through HO Central Nostro account &nbsp;&bull;&nbsp; 
+        NEFT / RTGS settlement windows active until 04:30 PM
+      </div>
+    </div>
+    <div class="cbs-ticker-controls">
+      <button class="cbs-ticker-btn" id="btnTickerPlayPause" title="Pause / Resume">&#10074;&#10074;</button>
+    </div>
+  </div>
+
+  <!-- Layout Body -->
+  <div class="cbs-app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link active">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <main class="cbs-main">
+      <div class="cbs-page-header">
+        <div class="cbs-breadcrumb-group">
+          <div class="cbs-breadcrumb">
+            <a href="../dashboard.html">SMARTCORE CBS</a>
+            <span>/</span>
+            <a href="#">Transactions</a>
+            <span>/</span>
+            <span>Cash / Transfer</span>
+          </div>
+          <h1 class="cbs-page-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy-600)" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            Cash / Fund Transfer Entry (CashTr.aspx)
+          </h1>
+        </div>
+
+        <div class="cbs-page-actions">
+          <button type="button" class="btn btn-secondary" onclick="CBS.confirmClearForm('transferForm');">
+            Clear Form
+          </button>
+          <button type="button" class="btn btn-primary" onclick="CBS.demoSave('Fund Transfer Batch #TR-00412');">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Execute Transfer
+          </button>
+        </div>
+      </div>
+
+      <form id="transferForm" onsubmit="event.preventDefault(); CBS.demoSave('Transfer Batch');">
+        
+        <!-- Batch & Transfer Mode Controls -->
+        <div class="cbs-card" style="margin-bottom: 20px;">
+          <div class="cbs-card-body" style="padding: 16px 20px;">
+            <div class="form-grid">
+              <div class="col-4 form-group">
+                <label class="form-label" for="CmbCashTransfer">Transfer Execution Mode <span class="req">*</span></label>
+                <select id="CmbCashTransfer" class="form-control" required>
+                  <option value="INTER_ACCOUNT" selected>Transfer &mdash; Inter-Account (Within Branch)</option>
+                  <option value="INTER_BRANCH">Transfer &mdash; Inter-Branch (CBS Online)</option>
+                  <option value="CLEARING">Clearing Settlement Transfer</option>
+                  <option value="CASH">Cash Transfer / Head Office Remittance</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="CmbBatchNo">Batch Number</label>
+                <select id="CmbBatchNo" class="form-control">
+                  <option value="3" selected>Batch 03 &mdash; Transfer Vouchers</option>
+                  <option value="1">Batch 01 &mdash; General Counter</option>
+                  <option value="2">Batch 02 &mdash; Clearing Settlement</option>
+                </select>
+              </div>
+
+              <div class="col-3 form-group">
+                <label class="form-label" for="TxtTrDate">Transaction Date</label>
+                <input type="text" id="TxtTrDate" class="form-control mono" value="29/10/2026" readonly>
+              </div>
+
+              <div class="col-2 form-group" style="justify-content: flex-end;">
+                <span class="badge badge-success" style="padding: 6px 10px; font-size: 12px;">
+                  Double Entry Validated
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Dual Leg: Source (Debit) Leg & Destination (Credit) Leg -->
+        <div class="form-grid" style="margin-bottom: 20px;">
+          
+          <!-- Source Account Leg (Debit) -->
+          <div class="col-6">
+            <div class="cbs-card" style="height: 100%; border-top: 4px solid var(--danger);">
+              <div class="cbs-card-header">
+                <div class="cbs-card-title" style="color: var(--danger);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                  DEBIT LEG (Source / Remitter Account)
+                </div>
+                <span class="badge badge-danger">Funds Source</span>
+              </div>
+
+              <div class="cbs-card-body">
+                <div class="form-grid">
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="CmbBranchFrom">From Branch</label>
+                    <select id="CmbBranchFrom" class="form-control">
+                      <option value="001" selected>001 — MAIN BRANCH</option>
+                      <option value="002">002 — CITY COMMERCIAL BRANCH</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="CmbSectionFrom">Section</label>
+                    <select id="CmbSectionFrom" class="form-control">
+                      <option value="DEPOSIT" selected>DEPOSIT</option>
+                      <option value="LOAN">LOAN</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="CmbSchemeFrom">Scheme Code</label>
+                    <select id="CmbSchemeFrom" class="form-control">
+                      <option value="101" selected>101 — SAVINGS BANK (SB)</option>
+                      <option value="103">103 — CURRENT ACCOUNT (CA)</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtAccNoFrom">Debit Account No <span class="req">*</span></label>
+                    <div class="input-with-button">
+                      <input type="text" id="TxtAccNoFrom" class="form-control mono font-semibold" value="00101004821" required>
+                      <button type="button" class="search-lookup-btn" title="Lookup Account" onclick="CBS.showToast('Debit Account: K. Radhakrishnan (Available: ₹ 1,48,250.00)', 'info');">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Remitter Details Preview -->
+                  <div class="col-12" style="background: var(--slate-50); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                      <span style="font-weight: 700; color: var(--navy-900);">K. RADHAKRISHNAN</span>
+                      <span class="mono" style="font-size: 11.5px; color: var(--slate-500);">CUST-10842</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                      <span style="color: var(--slate-600);">Available Balance:</span>
+                      <span class="mono font-semibold" style="color: var(--navy-700);">₹ 1,48,250.00 Cr</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 2px;">
+                      <span style="color: var(--slate-600);">Clear Balance:</span>
+                      <span class="mono font-semibold" style="color: var(--success);">₹ 1,48,250.00</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 form-group">
+                    <label class="form-label" for="txtDebitNarration">Debit Remarks / Reference</label>
+                    <input type="text" id="txtDebitNarration" class="form-control" value="Transfer to Term Deposit A/C #00102008412">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destination Account Leg (Credit) -->
+          <div class="col-6">
+            <div class="cbs-card" style="height: 100%; border-top: 4px solid var(--success);">
+              <div class="cbs-card-header">
+                <div class="cbs-card-title" style="color: var(--success);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+                  CREDIT LEG (Destination / Beneficiary Account)
+                </div>
+                <span class="badge badge-success">Funds Destination</span>
+              </div>
+
+              <div class="cbs-card-body">
+                <div class="form-grid">
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="DrpToBrnch">To Branch</label>
+                    <select id="DrpToBrnch" class="form-control">
+                      <option value="001" selected>001 — MAIN BRANCH</option>
+                      <option value="002">002 — CITY COMMERCIAL BRANCH</option>
+                      <option value="003">003 — WEST END BRANCH</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="CmbSectionTo">Section</label>
+                    <select id="CmbSectionTo" class="form-control">
+                      <option value="DEPOSIT" selected>DEPOSIT</option>
+                      <option value="LOAN">LOAN (Repayment)</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="CmbSchemeTo">Scheme Code</label>
+                    <select id="CmbSchemeTo" class="form-control">
+                      <option value="201" selected>201 — FIXED DEPOSIT (FD)</option>
+                      <option value="101">101 — SAVINGS BANK (SB)</option>
+                      <option value="301">301 — GOLD LOAN (GL)</option>
+                    </select>
+                  </div>
+
+                  <div class="col-6 form-group">
+                    <label class="form-label" for="TxtAccNoTo">Credit Account No <span class="req">*</span></label>
+                    <div class="input-with-button">
+                      <input type="text" id="TxtAccNoTo" class="form-control mono font-semibold" value="00102008412" required>
+                      <button type="button" class="search-lookup-btn" title="Lookup Account" onclick="CBS.showToast('Credit Account: K. Radhakrishnan (FD A/C)', 'info');">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Beneficiary Details Preview -->
+                  <div class="col-12" style="background: var(--slate-50); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                      <span style="font-weight: 700; color: var(--navy-900);">K. RADHAKRISHNAN (FD LOT-1)</span>
+                      <span class="mono" style="font-size: 11.5px; color: var(--slate-500);">CUST-10842</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                      <span style="color: var(--slate-600);">Current Deposit Balance:</span>
+                      <span class="mono font-semibold" style="color: var(--navy-700);">₹ 0.00 Cr (New Deposit)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 2px;">
+                      <span style="color: var(--slate-600);">Status:</span>
+                      <span class="mono font-semibold" style="color: var(--success);">Active Deposit Scheme</span>
+                    </div>
+                  </div>
+
+                  <div class="col-12 form-group">
+                    <label class="form-label" for="txtCreditNarration">Credit Remarks / Reference</label>
+                    <input type="text" id="txtCreditNarration" class="form-control" value="Transfer in from SB A/C #00101004821">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Transfer Execution & Ledger Entry Table -->
+        <div class="cbs-card">
+          <div class="cbs-card-header">
+            <div class="cbs-card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Transfer Amount & Dual Voucher Entry Ledger
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 12px; color: var(--slate-600);">Transfer Amount:</span>
+              <input type="text" class="form-control mono font-semibold text-right" style="width: 170px; font-size: 16px; color: var(--navy-900);" value="50,000.00">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="cbs-table">
+              <thead>
+                <tr>
+                  <th width="120">Leg</th>
+                  <th>Account Number</th>
+                  <th>Account Head / Scheme</th>
+                  <th>Customer / Beneficiary</th>
+                  <th class="text-right" width="160">Debit Amount (₹)</th>
+                  <th class="text-right" width="160">Credit Amount (₹)</th>
+                  <th class="text-center" width="120">Ledger Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-danger">Debit Leg</span></td>
+                  <td class="mono font-semibold">00101004821</td>
+                  <td>101 &mdash; Savings Bank General</td>
+                  <td>K. Radhakrishnan</td>
+                  <td class="text-right mono font-semibold" style="color: var(--danger);">50,000.00</td>
+                  <td class="text-right mono">0.00</td>
+                  <td class="text-center"><span class="badge badge-success">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-success">Credit Leg</span></td>
+                  <td class="mono font-semibold">00102008412</td>
+                  <td>201 &mdash; Fixed Deposit Standard</td>
+                  <td>K. Radhakrishnan</td>
+                  <td class="text-right mono">0.00</td>
+                  <td class="text-right mono font-semibold" style="color: var(--success);">50,000.00</td>
+                  <td class="text-center"><span class="badge badge-success">Verified</span></td>
+                </tr>
+                <tr style="background: var(--navy-50);">
+                  <td colspan="4" class="font-semibold text-right">Balanced Total:</td>
+                  <td class="text-right mono font-semibold" style="color: var(--danger);">50,000.00</td>
+                  <td class="text-right mono font-semibold" style="color: var(--success);">50,000.00</td>
+                  <td class="text-center"><span class="badge badge-navy">Match (0.00 Diff)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cbs-card-footer">
+            <button type="button" class="btn btn-secondary" onclick="CBS.confirmClearForm('transferForm');">
+              Reset
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.print();">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print Transfer Slip
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Execute Fund Transfer (₹ 50,000.00)
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </main>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

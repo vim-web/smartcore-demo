@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Passing (Authorisation) — SMARTCORE Modern UI</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Master Header -->
+    <header class="app-header" id="main-header">
+      <div class="header-left">
+        <button class="nav-toggle" id="sidebar-toggle" aria-label="Toggle navigation" title="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-logo">
+          <img src="../assets/images/logo.svg" alt="SMARTCORE CBS" width="38" height="38">
+          <div class="brand-text">
+            <span class="brand-title">SMARTCORE</span>
+            <span class="brand-sub">Core Banking Solution</span>
+          </div>
+        </div>
+        <span class="cbs-demo-pill" style="margin-left: 10px;" title="Static UI Demonstration — Illustrative Data Only">
+          <span class="cbs-demo-dot"></span> DEMO MODE
+        </span>
+      </div>
+
+      <div class="header-center">
+        <div class="session-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span class="badge-label">BRANCH:</span>
+          <span class="badge-value" id="current-branch-label">MAIN BRANCH (001)</span>
+        </div>
+        <div class="session-badge date-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="badge-label">DATE:</span>
+          <span class="badge-value" id="current-date-label">29-OCT-2026</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" title="Branch Manager / Supervisor">BM</div>
+          <div class="user-info">
+            <span class="user-name">VIMAL (MANAGER)</span>
+            <span class="user-role">SUPERVISOR / AUTHORISER</span>
+          </div>
+        </div>
+        <a href="../login.html" class="logout-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container" id="news-ticker-container">
+      <div class="ticker-label">
+        <span class="ticker-dot"></span>
+        CBS ALERTS
+      </div>
+      <div class="ticker-content" id="ticker-content">
+        <span class="ticker-item">Maker-Checker Authorization Queue: 4 pending transactions require Supervisor approval.</span>
+        <span class="ticker-item">High value transfer (&gt; ₹5,00,000) flagged for dual authorization under RBI AML guidelines.</span>
+        <span class="ticker-item">Day-end cutoff scheduled for 17:30 IST. Complete pending manager authorisations promptly.</span>
+      </div>
+      <button class="ticker-toggle-btn" id="ticker-toggle-btn" title="Pause / Play Marquee">⏸</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-body">
+                                                <!-- Sidebar Navigation -->
+      <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link active">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+      <!-- Page Content Area -->
+      <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../dashboard.html">SMARTCORE</a></li>
+            <li class="breadcrumb-item">Supervisory & Audit</li>
+            <li class="breadcrumb-item active">Manager Passing (Authorisation)</li>
+          </ol>
+          <div class="page-quick-stats">
+            <span class="tag-badge tag-warning" id="pending-counter-badge">Pending: 4</span>
+            <span class="tag-badge tag-success" id="passed-counter-badge">Authorised Today: 18</span>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div>
+            <h1 class="page-title">AUTHORISATION (MANAGER PASSING)</h1>
+            <p class="page-subtitle">Maker-Checker dual control verification, transaction approval, and non-financial override log (Original: <code>ManagerPassing.aspx</code>)</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="btn btn-secondary" onclick="refreshPassingGrid()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+              Refresh
+            </button>
+            <a href="../dashboard.html" class="btn btn-outline">Close</a>
+          </div>
+        </div>
+
+        <!-- Filter & Query Control Card -->
+        <div class="card mb-4">
+          <div class="card-header bg-subtle">
+            <h3 class="card-title text-navy">Search & Selection Filters</h3>
+            <span class="text-muted text-small">Select queue type and filter parameters</span>
+          </div>
+          <div class="card-body">
+            <!-- Radio Queue Selector -->
+            <div class="queue-selector-bar mb-3">
+              <label class="radio-chip">
+                <input type="radio" name="PassingQueue" id="OptPending" value="pending" checked onchange="filterQueue()">
+                <span class="chip-label">Pending Entries</span>
+                <span class="chip-count" id="chip-pending-count">4</span>
+              </label>
+
+              <label class="radio-chip">
+                <input type="radio" name="PassingQueue" id="OptPassed" value="passed" onchange="filterQueue()">
+                <span class="chip-label">Passed Entries</span>
+                <span class="chip-count" id="chip-passed-count">18</span>
+              </label>
+
+              <label class="radio-chip">
+                <input type="radio" name="PassingQueue" id="OptAll" value="all" onchange="filterQueue()">
+                <span class="chip-label">All Entries</span>
+                <span class="chip-count">22</span>
+              </label>
+
+              <label class="radio-chip">
+                <input type="radio" name="PassingQueue" id="RadioApp" value="app" onchange="filterQueue()">
+                <span class="chip-label">Application Money</span>
+                <span class="chip-count">2</span>
+              </label>
+            </div>
+
+            <!-- Detailed Search Parameters Grid -->
+            <div class="grid-form-4col">
+              <!-- Scheme Search -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkScheme" onchange="toggleField('TxtScheme', this.checked)">
+                  <label for="ChkScheme">Search With Scheme</label>
+                </div>
+                <input type="text" id="TxtScheme" class="form-control" placeholder="Enter Scheme Code (e.g. SB-101)" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Amount Search -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkAmount" onchange="toggleField('TxtAmt', this.checked)">
+                  <label for="ChkAmount">Search With Amount</label>
+                </div>
+                <input type="number" id="TxtAmt" class="form-control text-right" placeholder="Min Amount (₹)" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Account No Search -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkAccNo" onchange="toggleField('TxtAccno00', this.checked)">
+                  <label for="ChkAccNo">Search Account No</label>
+                </div>
+                <input type="text" id="TxtAccno00" class="form-control" placeholder="Account No" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Credit/Debit Filter -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkCreditDebit" onchange="toggleField('CmbCreditdebit', this.checked)">
+                  <label for="ChkCreditDebit">Credit / Debit</label>
+                </div>
+                <select id="CmbCreditdebit" class="form-control" disabled onchange="applyFilterDebounce()">
+                  <option value="ALL">All Entries</option>
+                  <option value="Credit">Credit Only</option>
+                  <option value="Debit">Debit Only</option>
+                </select>
+              </div>
+
+              <!-- Maker ID -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkMakerId" onchange="toggleField('TxtMakerId', this.checked)">
+                  <label for="ChkMakerId">Maker ID</label>
+                </div>
+                <input type="text" id="TxtMakerId" class="form-control" placeholder="e.g. TELLER-01" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Checker ID -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkChekerId" onchange="toggleField('TxtCheckerId', this.checked)">
+                  <label for="ChkChekerId">Checker ID</label>
+                </div>
+                <input type="text" id="TxtCheckerId" class="form-control" placeholder="e.g. MGR-002" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Batch No -->
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <input type="checkbox" id="ChkBatch" onchange="toggleField('TxtBatch', this.checked)">
+                  <label for="ChkBatch">Batch No</label>
+                </div>
+                <input type="text" id="TxtBatch" class="form-control" placeholder="Batch No" disabled onkeyup="applyFilterDebounce()">
+              </div>
+
+              <!-- Quick Table Search -->
+              <div class="form-group">
+                <label for="txtGlobalPassingSearch">Instant Quick Filter</label>
+                <div class="input-with-icon">
+                  <input type="text" id="txtGlobalPassingSearch" class="form-control" placeholder="Filter by voucher, name, amount..." onkeyup="CBS.filterTableRows('DgvPassing', this.value)">
+                  <span class="input-icon">🔍</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1: Financial Transactions Passing Grid (DgvPassing) -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h2 class="card-title">VOUCHER AUTHORISATION QUEUE (DgvPassing)</h2>
+              <span class="text-muted text-small">Double entry financial vouchers submitted by Tellers awaiting Manager verification</span>
+            </div>
+            <div class="d-flex gap-2 align-center">
+              <span class="badge badge-info" id="grid-row-count">Showing 4 items</span>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="authoriseAllVisible()">Authorise All Filtered</button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="DgvPassing">
+              <thead>
+                <tr>
+                  <th style="width: 110px;">Action</th>
+                  <th style="width: 90px;">Status</th>
+                  <th>Vou No</th>
+                  <th>A/C No & Particulars</th>
+                  <th class="text-right">Rec Cash (₹)</th>
+                  <th class="text-right">Rec Transfer (₹)</th>
+                  <th class="text-right">Pay Cash (₹)</th>
+                  <th class="text-right">Pay Transfer (₹)</th>
+                  <th>Maker ID</th>
+                  <th>Checker ID</th>
+                  <th>Making Time</th>
+                </tr>
+              </thead>
+              <tbody id="passing-tbody">
+                <!-- Row 1: High Value Cash Deposit -->
+                <tr data-status="pending" data-scheme="SB-101" data-amount="150000" data-acc="SB-001-20944" data-type="Credit" data-maker="TELLER-01" data-vouno="VOU-84091">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'VOU-84091')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><strong>VOU-84091</strong></td>
+                  <td>
+                    <div><strong>SB-001-20944</strong> - SMT. ANANYA SEN</div>
+                    <span class="text-muted text-small">Cash Deposit - Business Current proceeds</span>
+                  </td>
+                  <td class="text-right font-mono font-bold text-success">1,50,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td><span class="tag-badge">TELLER-01</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td class="text-small">10:42 AM</td>
+                </tr>
+
+                <!-- Row 2: High Value Cheque Withdrawal -->
+                <tr data-status="pending" data-scheme="CA-201" data-amount="325000" data-acc="CA-001-88412" data-type="Debit" data-maker="TELLER-02" data-vouno="VOU-84092">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'VOU-84092')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><strong>VOU-84092</strong></td>
+                  <td>
+                    <div><strong>CA-001-88412</strong> - APEX LOGISTICS PVT LTD</div>
+                    <span class="text-muted text-small">Self Cheque No: 441098 clearance</span>
+                  </td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono font-bold text-danger">3,25,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td><span class="tag-badge">TELLER-02</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td class="text-small">11:05 AM</td>
+                </tr>
+
+                <!-- Row 3: Account Transfer -->
+                <tr data-status="pending" data-scheme="FD-301" data-amount="500000" data-acc="FD-001-10294" data-type="Credit" data-maker="TELLER-01" data-vouno="VOU-84093">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'VOU-84093')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><strong>VOU-84093</strong></td>
+                  <td>
+                    <div><strong>FD-001-10294</strong> - DR. K. RADHAKRISHNAN</div>
+                    <span class="text-muted text-small">Fixed Deposit Creation via SB Debit (SB-001-19820)</span>
+                  </td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono font-bold text-primary">5,00,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono font-bold text-danger">5,00,000.00</td>
+                  <td><span class="tag-badge">TELLER-01</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td class="text-small">11:18 AM</td>
+                </tr>
+
+                <!-- Row 4: RTGS Inward Settlement -->
+                <tr data-status="pending" data-scheme="CA-201" data-amount="850000" data-acc="CA-001-55021" data-type="Credit" data-maker="TELLER-03" data-vouno="VOU-84094">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'VOU-84094')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><strong>VOU-84094</strong></td>
+                  <td>
+                    <div><strong>CA-001-55021</strong> - BHARAT AGRO SUPPLIERS</div>
+                    <span class="text-muted text-small">Inward RTGS (UTR: HDFCR520261029009) via Clearing GL</span>
+                  </td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono font-bold text-primary">8,50,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td><span class="tag-badge">TELLER-03</span></td>
+                  <td><span class="text-muted">—</span></td>
+                  <td class="text-small">11:30 AM</td>
+                </tr>
+
+                <!-- Row 5: Already Passed (Hidden on initial 'pending' filter) -->
+                <tr data-status="passed" data-scheme="SB-101" data-amount="75000" data-acc="SB-001-30419" data-type="Debit" data-maker="TELLER-01" data-vouno="VOU-84080" style="display:none;">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline" disabled>Authorised</button>
+                  </td>
+                  <td><span class="status-badge status-active">Passed</span></td>
+                  <td><strong>VOU-84080</strong></td>
+                  <td>
+                    <div><strong>SB-001-30419</strong> - SURESH BABU K.</div>
+                    <span class="text-muted text-small">Cash Withdrawal across counter</span>
+                  </td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-danger font-bold">75,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td><span class="tag-badge">TELLER-01</span></td>
+                  <td><span class="tag-badge tag-primary">MGR-001</span></td>
+                  <td class="text-small">09:55 AM</td>
+                </tr>
+
+                <!-- Row 6: Already Passed (Hidden on initial 'pending' filter) -->
+                <tr data-status="passed" data-scheme="LN-401" data-amount="200000" data-acc="LN-001-09411" data-type="Debit" data-maker="TELLER-02" data-vouno="VOU-84081" style="display:none;">
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline" disabled>Authorised</button>
+                  </td>
+                  <td><span class="status-badge status-active">Passed</span></td>
+                  <td><strong>VOU-84081</strong></td>
+                  <td>
+                    <div><strong>LN-001-09411</strong> - MEENAKSHI AMMAL</div>
+                    <span class="text-muted text-small">Gold Loan First Disbursement to SB-1902</span>
+                  </td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-primary font-bold">2,00,000.00</td>
+                  <td class="text-right font-mono text-muted">0.00</td>
+                  <td class="text-right font-mono text-danger font-bold">2,00,000.00</td>
+                  <td><span class="tag-badge">TELLER-02</span></td>
+                  <td><span class="tag-badge tag-primary">MGR-001</span></td>
+                  <td class="text-small">10:12 AM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 2: Non-Financial Master & Service Passing Grid (DgvNonTranPassing) -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h2 class="card-title">NON-FINANCIAL & MASTER AUTHORISATION (DgvNonTranPassing)</h2>
+              <span class="text-muted text-small">Customer master changes, limit revisions, and dormant account activations requiring dual control</span>
+            </div>
+            <span class="badge badge-info">2 Pending Approvals</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="DgvNonTranPassing">
+              <thead>
+                <tr>
+                  <th style="width: 110px;">Action</th>
+                  <th style="width: 90px;">Status</th>
+                  <th>Auth Type</th>
+                  <th>Particulars & Customer Details</th>
+                  <th>Maker ID</th>
+                  <th>Making Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'NF-0912')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><span class="tag-badge tag-warning">KYC UPDATE</span></td>
+                  <td>
+                    <div><strong>CUST-10492: RAJESH VERMA</strong></div>
+                    <span class="text-muted text-small">Address modification & High-Risk status reclassification per Form 60</span>
+                  </td>
+                  <td><span class="tag-badge">TELLER-01</span></td>
+                  <td class="text-small">10:50 AM</td>
+                </tr>
+                <tr>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-primary auth-btn" onclick="CBS.authoriseItem(this, 'NF-0913')">
+                      Authorise
+                    </button>
+                  </td>
+                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td><span class="tag-badge tag-info">DORMANT ACTIVATION</span></td>
+                  <td>
+                    <div><strong>SB-001-14022: MARY JOSEPH</strong></div>
+                    <span class="text-muted text-small">Account dormant &gt; 24 months. Biometric re-authentication submitted.</span>
+                  </td>
+                  <td><span class="tag-badge">TELLER-02</span></td>
+                  <td class="text-small">11:15 AM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: Floating Details Modal Preview (PassingDiv from Original ASPX) -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title text-navy">Manager Audit & Operational Safety Guidelines</h3>
+          </div>
+          <div class="card-body">
+            <div class="audit-note-box">
+              <div class="audit-icon">ℹ️</div>
+              <div class="audit-text">
+                <p><strong>Maker-Checker Dual Control Enforcement:</strong> Under Core Banking Operating Regulations, the user who created or posted a voucher (Maker ID) cannot authorize the same transaction. All items authorized above are digitally signed and recorded in the permanent audit trail with timestamp, supervisor user code, and workstation terminal IP.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function toggleField(elementId, isChecked) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.disabled = !isChecked;
+        if (isChecked) el.focus();
+        applyFilterDebounce();
+      }
+    }
+
+    function filterQueue() {
+      const selected = document.querySelector('input[name="PassingQueue"]:checked').value;
+      const rows = document.querySelectorAll('#passing-tbody tr');
+      let visibleCount = 0;
+
+      rows.forEach(r => {
+        const rowStatus = r.getAttribute('data-status');
+        if (selected === 'all') {
+          r.style.display = '';
+          visibleCount++;
+        } else if (selected === 'pending') {
+          if (rowStatus === 'pending') {
+            r.style.display = '';
+            visibleCount++;
+          } else {
+            r.style.display = 'none';
+          }
+        } else if (selected === 'passed') {
+          if (rowStatus === 'passed') {
+            r.style.display = '';
+            visibleCount++;
+          } else {
+            r.style.display = 'none';
+          }
+        } else if (selected === 'app') {
+          // Application money entries
+          if (r.getAttribute('data-vouno') === 'VOU-84093') {
+            r.style.display = '';
+            visibleCount++;
+          } else {
+            r.style.display = 'none';
+          }
+        }
+      });
+
+      document.getElementById('grid-row-count').textContent = 'Showing ' + visibleCount + ' items';
+      CBS.showToast('Switched queue to: ' + selected.toUpperCase(), 'info');
+    }
+
+    function applyFilterDebounce() {
+      const schemeVal = document.getElementById('ChkScheme').checked ? document.getElementById('TxtScheme').value.toUpperCase().trim() : '';
+      const minAmt = document.getElementById('ChkAmount').checked ? parseFloat(document.getElementById('TxtAmt').value) || 0 : 0;
+      const accVal = document.getElementById('ChkAccNo').checked ? document.getElementById('TxtAccno00').value.toUpperCase().trim() : '';
+      const typeVal = document.getElementById('ChkCreditDebit').checked ? document.getElementById('CmbCreditdebit').value : 'ALL';
+      const makerVal = document.getElementById('ChkMakerId').checked ? document.getElementById('TxtMakerId').value.toUpperCase().trim() : '';
+      const selectedQueue = document.querySelector('input[name="PassingQueue"]:checked').value;
+
+      const rows = document.querySelectorAll('#passing-tbody tr');
+      let count = 0;
+
+      rows.forEach(row => {
+        let match = true;
+        const rowStatus = row.getAttribute('data-status');
+        const rowScheme = (row.getAttribute('data-scheme') || '').toUpperCase();
+        const rowAmt = parseFloat(row.getAttribute('data-amount')) || 0;
+        const rowAcc = (row.getAttribute('data-acc') || '').toUpperCase();
+        const rowType = row.getAttribute('data-type') || '';
+        const rowMaker = (row.getAttribute('data-maker') || '').toUpperCase();
+
+        if (selectedQueue !== 'all' && rowStatus !== selectedQueue && selectedQueue !== 'app') match = false;
+        if (schemeVal && !rowScheme.includes(schemeVal)) match = false;
+        if (minAmt > 0 && rowAmt < minAmt) match = false;
+        if (accVal && !rowAcc.includes(accVal)) match = false;
+        if (typeVal !== 'ALL' && rowType !== typeVal) match = false;
+        if (makerVal && !rowMaker.includes(makerVal)) match = false;
+
+        if (match) {
+          row.style.display = '';
+          count++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      document.getElementById('grid-row-count').textContent = 'Showing ' + count + ' items';
+    }
+
+    function refreshPassingGrid() {
+      CBS.showToast('Refreshing authorisation queue from CBS core...', 'info');
+      setTimeout(() => {
+        CBS.showToast('Queue refreshed. All records up to date.', 'success');
+      }, 400);
+    }
+
+    function authoriseAllVisible() {
+      const visibleButtons = document.querySelectorAll('#passing-tbody tr:not([style*="display: none"]) .auth-btn:not([disabled])');
+      if (visibleButtons.length === 0) {
+        CBS.showToast('No pending items to authorise in current view', 'warning');
+        return;
+      }
+      visibleButtons.forEach(btn => btn.click());
+      CBS.showToast('All visible entries authorised successfully', 'success');
+    }
+  </script>
+</body>
+</html>

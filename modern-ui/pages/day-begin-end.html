@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day End Process & Settlement — SMARTCORE Modern UI</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Master Header -->
+    <header class="app-header" id="main-header">
+      <div class="header-left">
+        <button class="nav-toggle" id="sidebar-toggle" aria-label="Toggle navigation" title="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-logo">
+          <img src="../assets/images/logo.svg" alt="SMARTCORE CBS" width="38" height="38">
+          <div class="brand-text">
+            <span class="brand-title">SMARTCORE</span>
+            <span class="brand-sub">Core Banking Solution</span>
+          </div>
+        </div>
+        <span class="cbs-demo-pill" style="margin-left: 10px;" title="Static UI Demonstration — Illustrative Data Only">
+          <span class="cbs-demo-dot"></span> DEMO MODE
+        </span>
+      </div>
+
+      <div class="header-center">
+        <div class="session-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span class="badge-label">BRANCH:</span>
+          <span class="badge-value" id="current-branch-label">MAIN BRANCH (001)</span>
+        </div>
+        <div class="session-badge date-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="badge-label">DATE:</span>
+          <span class="badge-value" id="current-date-label">29-OCT-2026</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" title="Branch Manager">BM</div>
+          <div class="user-info">
+            <span class="user-name">VIMAL (MANAGER)</span>
+            <span class="user-role">SUPERVISOR / SYSTEM ADMIN</span>
+          </div>
+        </div>
+        <a href="../login.html" class="logout-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container" id="news-ticker-container">
+      <div class="ticker-label">
+        <span class="ticker-dot"></span>
+        CBS ALERTS
+      </div>
+      <div class="ticker-content" id="ticker-content">
+        <span class="ticker-item">WARNING: All Teller cash tills must be verified and balanced before initiating Day-End posting.</span>
+        <span class="ticker-item">General Ledger reconciliation completed for today: Debit ₹42,50,000.00 = Credit ₹42,50,000.00.</span>
+        <span class="ticker-item">Day Lock will advance the Core Banking System date to the next scheduled business day.</span>
+      </div>
+      <button class="ticker-toggle-btn" id="ticker-toggle-btn" title="Pause / Play Marquee">⏸</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-body">
+                                                <!-- Sidebar Navigation -->
+      <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link active">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../dashboard.html">SMARTCORE</a></li>
+            <li class="breadcrumb-item">Supervisory & Audit</li>
+            <li class="breadcrumb-item active">Day End Process</li>
+          </ol>
+          <div class="page-quick-stats">
+            <span class="tag-badge tag-warning" id="system-status-badge">System Status: DEMO MODE (SIMULATED DAY OPEN)</span>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div>
+            <h1 class="page-title">DAY END PROCESS & SETTLEMENT</h1>
+            <p class="page-subtitle">Perform end-of-day reconciliation, GL balancing, vault cash verification, and date rollforward (Original: <code>DayBeginEnd.aspx</code>)</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="btn btn-secondary" onclick="openDenominationModal()">
+              💵 Cash Denomination Breakdown
+            </button>
+            <a href="../dashboard.html" class="btn btn-outline">Close</a>
+          </div>
+        </div>
+
+        <!-- Section 1: Date Configuration Card -->
+        <div class="card mb-4">
+          <div class="card-header bg-subtle">
+            <h2 class="card-title text-navy">1. Business Date & Day Cutoff Parameters</h2>
+          </div>
+          <div class="card-body">
+            <div class="grid-form-3col align-end">
+              <div class="form-group">
+                <label for="Txt_TransactionDate">Current Transaction Date (Banking Day) <span class="required">*</span></label>
+                <input type="text" id="Txt_TransactionDate" class="form-control font-bold font-mono text-large" value="29/10/2026" readonly>
+              </div>
+
+              <div class="form-group">
+                <label for="Txt_NextTranDate">Next Scheduled Transaction Date <span class="required">*</span></label>
+                <input type="text" id="Txt_NextTranDate" class="form-control font-bold font-mono text-large text-primary" value="30/10/2026">
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn-primary w-100" id="Cmd_Next" onclick="verifyDayEndReadiness()">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Verify All Pre-Requisites
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Day End Process Verification Checklist (Dgv_DayEndProcess) -->
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h2 class="card-title">2. Day End Pre-Closing Verification (Dgv_DayEndProcess)</h2>
+              <span class="text-muted text-small">Mandatory settlement checks before database lock and interest accrual</span>
+            </div>
+            <span class="status-badge status-active" id="checklist-summary">6 of 6 Completed</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="Dgv_DayEndProcess">
+              <thead>
+                <tr>
+                  <th style="width: 45%;">Day End Process Step</th>
+                  <th style="width: 20%;" class="text-right">Audit Values / Records</th>
+                  <th style="width: 15%;">Audit Status</th>
+                  <th style="width: 20%;">Processing Status</th>
+                </tr>
+              </thead>
+              <tbody id="dayend-process-tbody">
+                <tr>
+                  <td>
+                    <div><strong>Teller Cash Physical Verification</strong></div>
+                    <span class="text-muted text-small">All physical teller drawers matched against CBS cash book</span>
+                  </td>
+                  <td class="text-right font-mono font-bold">₹ 14,85,620.00</td>
+                  <td><span class="status-badge status-active">BALANCED</span></td>
+                  <td><span class="tag-badge tag-success">Verified OK</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div><strong>Unposted & Suspense Vouchers Check</strong></div>
+                    <span class="text-muted text-small">Verifies no orphan or pending vouchers remain in queue</span>
+                  </td>
+                  <td class="text-right font-mono font-bold">0 Pending</td>
+                  <td><span class="status-badge status-active">CLEARED</span></td>
+                  <td><span class="tag-badge tag-success">Queue Empty</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div><strong>Inward & Outward Clearing Settlement</strong></div>
+                    <span class="text-muted text-small">CTS 2010 cheque batch clearing reconciliation with RBI</span>
+                  </td>
+                  <td class="text-right font-mono font-bold">₹ 8,42,150.00</td>
+                  <td><span class="status-badge status-active">SETTLED</span></td>
+                  <td><span class="tag-badge tag-success">Cheques Reconciled</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div><strong>Interest & Periodic Accrual Computation</strong></div>
+                    <span class="text-muted text-small">Calculates daily product interest for all Savings & Term Deposits</span>
+                  </td>
+                  <td class="text-right font-mono font-bold">1,420 Accounts</td>
+                  <td><span class="status-badge status-active">COMPUTED</span></td>
+                  <td><span class="tag-badge tag-success">Accrual Ready</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div><strong>General Ledger (GL) Balancing Check</strong></div>
+                    <span class="text-muted text-small">Trial balance check: Total Debit vouchers vs Total Credit vouchers</span>
+                  </td>
+                  <td class="text-right font-mono font-bold text-success">Diff: ₹ 0.00</td>
+                  <td><span class="status-badge status-active">PERFECT</span></td>
+                  <td><span class="tag-badge tag-success">GL Reconciled</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div><strong>End-of-Day Core Database Backup</strong></div>
+                    <span class="text-muted text-small">Automated cryptographic snapshot of CBS schema and ledger</span>
+                  </td>
+                  <td class="text-right font-mono font-bold">SHA-256 Valid</td>
+                  <td><span class="status-badge status-active">READY</span></td>
+                  <td><span class="tag-badge tag-success">Target Configured</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: Interactive Day-End Execution Action Card -->
+        <div class="card mb-4 highlight-card">
+          <div class="card-body text-center py-4">
+            <h3 class="text-navy mb-2">Execute Core Banking Day-End Cutoff</h3>
+            <p class="text-muted mb-4 max-w-600 mx-auto">
+              Initiating Day-End will post all interest accruals to the General Ledger, reset daily teller batches, lock the cash vault for today, and roll forward the system date to <strong>30/10/2026</strong>.
+            </p>
+
+            <!-- Progress Indicator (Hidden initially) -->
+            <div id="dayend-progress-container" class="mb-4" style="display: none; max-width: 600px; margin-left: auto; margin-right: auto;">
+              <div class="d-flex justify-between mb-1">
+                <span class="font-bold text-navy" id="progress-step-label">Initializing Day End...</span>
+                <span class="font-bold text-navy" id="progress-percent-label">0%</span>
+              </div>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-center gap-3">
+              <button type="button" class="btn btn-secondary" onclick="openDenominationModal()">
+                💵 Verify Cash Denomination
+              </button>
+              <button type="button" class="btn btn-danger btn-large" id="Img_Post" onclick="triggerDayEndSimulation()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                RUN DAY END PROCESS (DAYEND)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Day End Posting & Resetting Table (Dgv_DayEndPosting) -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2 class="card-title">3. Day End Posting & Ledger Resetting (Dgv_DayEndPosting)</h2>
+            <span class="text-muted text-small">Final posting tasks and batch sequence resets triggered during Day-End</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="Dgv_DayEndPosting">
+              <thead>
+                <tr>
+                  <th style="width: 50%;">Posting / Resetting Process</th>
+                  <th style="width: 25%;">Execution Status</th>
+                  <th style="width: 25%;">Posting Status</th>
+                </tr>
+              </thead>
+              <tbody id="posting-tbody">
+                <tr>
+                  <td><strong>Daily Cash Register Ledger Close</strong></td>
+                  <td><span class="status-badge status-pending" id="post-status-1">Awaiting Trigger</span></td>
+                  <td><span class="text-muted" id="post-desc-1">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Post Accrued Interest to General Ledger Accounts</strong></td>
+                  <td><span class="status-badge status-pending" id="post-status-2">Awaiting Trigger</span></td>
+                  <td><span class="text-muted" id="post-desc-2">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Reset Teller Batch & Daily Voucher Numbers</strong></td>
+                  <td><span class="status-badge status-pending" id="post-status-3">Awaiting Trigger</span></td>
+                  <td><span class="text-muted" id="post-desc-3">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Roll System Date Forward to Next Banking Day</strong></td>
+                  <td><span class="status-badge status-pending" id="post-status-4">Awaiting Trigger</span></td>
+                  <td><span class="text-muted" id="post-desc-4">Scheduled</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Cash Denomination Breakdown Modal (CashDenomination.aspx replica) -->
+  <div class="modal-backdrop" id="denomination-modal" style="display: none;">
+    <div class="modal-window" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Physical Vault Cash Denomination Breakdown</h3>
+        <button type="button" class="modal-close" onclick="closeDenominationModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-small text-muted mb-3">Count physical notes and coins in the branch vault to verify total against the CBS general cash ledger (₹ 14,85,620.00).</p>
+
+        <div class="table-responsive">
+          <table class="data-table" id="denomination-table">
+            <thead>
+              <tr>
+                <th>Denomination</th>
+                <th style="width: 140px;">Count (Pieces)</th>
+                <th class="text-right">Total Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>₹ 2000 Notes</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="2000" value="150" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">3,00,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>₹ 500 Notes</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="500" value="2000" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">10,00,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>₹ 200 Notes</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="200" value="650" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">1,30,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>₹ 100 Notes</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="100" value="480" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">48,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>₹ 50 Notes</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="50" value="120" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">6,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>₹ 20 / ₹ 10 Notes & Coins</strong></td>
+                <td><input type="number" class="form-control text-right denom-qty" data-val="10" value="162" min="0" oninput="calculateDenominations()"></td>
+                <td class="text-right font-mono font-bold denom-row-total">1,620.00</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="table-total-row">
+                <td colspan="2" class="font-bold">Total Physical Cash in Vault:</td>
+                <td class="text-right font-mono font-bold text-success text-large" id="denom-grand-total">₹ 14,85,620.00</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="alert alert-success mt-3" id="denom-match-alert">
+          ✓ Vault Cash matches the CBS General Ledger balance exactly (₹ 14,85,620.00). Difference: ₹ 0.00
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeDenominationModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="confirmDenominations()">Confirm & Save Denomination</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function openDenominationModal() {
+      document.getElementById('denomination-modal').style.display = 'flex';
+      calculateDenominations();
+    }
+
+    function closeDenominationModal() {
+      document.getElementById('denomination-modal').style.display = 'none';
+    }
+
+    function calculateDenominations() {
+      const rows = document.querySelectorAll('#denomination-table tbody tr');
+      let grandTotal = 0;
+
+      rows.forEach(r => {
+        const input = r.querySelector('.denom-qty');
+        const unitVal = parseFloat(input.getAttribute('data-val')) || 0;
+        const qty = parseInt(input.value) || 0;
+        const total = unitVal * qty;
+        r.querySelector('.denom-row-total').textContent = total.toLocaleString('en-IN', {minimumFractionDigits: 2});
+        grandTotal += total;
+      });
+
+      document.getElementById('denom-grand-total').textContent = '₹ ' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+
+      const alertBox = document.getElementById('denom-match-alert');
+      const expected = 1485620;
+      if (grandTotal === expected) {
+        alertBox.className = 'alert alert-success mt-3';
+        alertBox.textContent = `✓ Vault Cash matches the CBS General Ledger balance exactly (₹ ${expected.toLocaleString('en-IN')}). Difference: ₹ 0.00`;
+      } else {
+        const diff = grandTotal - expected;
+        alertBox.className = 'alert alert-danger mt-3';
+        alertBox.textContent = `⚠️ Vault cash does not match CBS Ledger! Discrepancy: ₹ ${diff.toLocaleString('en-IN')}`;
+      }
+    }
+
+    function confirmDenominations() {
+      closeDenominationModal();
+      CBS.showToast('Physical Vault Denomination verified and recorded in Cash Register.', 'success');
+    }
+
+    function verifyDayEndReadiness() {
+      CBS.showToast('Verifying Day-End pre-requisites: Tellers, Vouchers, Clearing, GL balancing...', 'info');
+      setTimeout(() => {
+        CBS.showToast('All 6 pre-requisite audits PASSED. Branch is ready for Day End Execution.', 'success');
+      }, 600);
+    }
+
+    function triggerDayEndSimulation(skipPrompt) {
+      if (!skipPrompt) {
+        const confirmRun = confirm('Are you sure you want to run DAY END PROCESS for 29/10/2026? The CBS system date will advance to 30/10/2026.');
+        if (!confirmRun) return;
+      }
+
+      const progressContainer = document.getElementById('dayend-progress-container');
+      const progressBar = document.getElementById('progress-bar-fill');
+      const stepLabel = document.getElementById('progress-step-label');
+      const percentLabel = document.getElementById('progress-percent-label');
+      const postBtn = document.getElementById('Img_Post');
+
+      progressContainer.style.display = 'block';
+      postBtn.disabled = true;
+      postBtn.classList.add('btn-disabled');
+
+      const steps = [
+        { pct: 25, label: '1/4: Closing Daily Cash Register & locking vault...', id: 1, desc: 'Cash Register Closed' },
+        { pct: 50, label: '2/4: Posting daily accrued interest to GL...', id: 2, desc: 'Interest Posted to GL' },
+        { pct: 75, label: '3/4: Resetting daily voucher and batch counters...', id: 3, desc: 'Batch Counters Reset' },
+        { pct: 100, label: '4/4: Advancing CBS date to 30-OCT-2026...', id: 4, desc: 'Date Advanced to 30/10/2026' }
+      ];
+
+      let currentStep = 0;
+      function runNextStep() {
+        if (currentStep < steps.length) {
+          const s = steps[currentStep];
+          progressBar.style.width = s.pct + '%';
+          stepLabel.textContent = s.label;
+          percentLabel.textContent = s.pct + '%';
+
+          const statusBadge = document.getElementById('post-status-' + s.id);
+          const descSpan = document.getElementById('post-desc-' + s.id);
+          if (statusBadge) {
+            statusBadge.className = 'status-badge status-active';
+            statusBadge.textContent = 'COMPLETED';
+          }
+          if (descSpan) {
+            descSpan.className = 'tag-badge tag-success';
+            descSpan.textContent = s.desc;
+          }
+
+          currentStep++;
+          setTimeout(runNextStep, 600);
+        } else {
+          // Finished
+          stepLabel.textContent = '✓ Day End Processing Completed Successfully!';
+          document.getElementById('current-date-label').textContent = '30-OCT-2026';
+          document.getElementById('Txt_TransactionDate').value = '30/10/2026';
+          document.getElementById('Txt_NextTranDate').value = '31/10/2026';
+          document.getElementById('system-status-badge').className = 'tag-badge tag-success';
+          document.getElementById('system-status-badge').textContent = 'System Status: DEMO MODE (ADVANCED TO 30/10/2026)';
+
+          CBS.showToast('Day End processing completed. Banking date advanced to 30-OCT-2026.', 'success');
+        }
+      }
+
+      runNextStep();
+    }
+  </script>
+</body>
+</html>

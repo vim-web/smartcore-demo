@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit Master (Term Deposit & Accounts) — SMARTCORE Modern UI</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Master Header -->
+    <header class="app-header" id="main-header">
+      <div class="header-left">
+        <button class="nav-toggle" id="sidebar-toggle" aria-label="Toggle navigation" title="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-logo">
+          <img src="../assets/images/logo.svg" alt="SMARTCORE CBS" width="38" height="38">
+          <div class="brand-text">
+            <span class="brand-title">SMARTCORE</span>
+            <span class="brand-sub">Core Banking Solution</span>
+          </div>
+        </div>
+        <span class="cbs-demo-pill" style="margin-left: 10px;" title="Static UI Demonstration — Illustrative Data Only">
+          <span class="cbs-demo-dot"></span> DEMO MODE
+        </span>
+      </div>
+
+      <div class="header-center">
+        <div class="session-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          </svg>
+          <span class="badge-label">BRANCH:</span>
+          <span class="badge-value" id="current-branch-label">MAIN BRANCH (001)</span>
+        </div>
+        <div class="session-badge date-badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="badge-label">DATE:</span>
+          <span class="badge-value" id="current-date-label">29-OCT-2026</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-profile">
+          <div class="user-avatar" title="Branch Officer">DE</div>
+          <div class="user-info">
+            <span class="user-name">VIMAL (OFFICER)</span>
+            <span class="user-role">DEPOSIT & ACCOUNTS DESK</span>
+          </div>
+        </div>
+        <a href="../login.html" class="logout-btn" title="Sign Out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container" id="news-ticker-container">
+      <div class="ticker-label">
+        <span class="ticker-dot"></span>
+        CBS ALERTS
+      </div>
+      <div class="ticker-content" id="ticker-content">
+        <span class="ticker-item">Senior Citizen Term Deposit Special Rate: 0.50% additional interest applicable on tenures &gt; 12 months.</span>
+        <span class="ticker-item">Form 15G / 15H submission window open for TDS exemption on cumulative interest deposits.</span>
+        <span class="ticker-item">All split certificates must balance exactly to the parent master deposit voucher total.</span>
+      </div>
+      <button class="ticker-toggle-btn" id="ticker-toggle-btn" title="Pause / Play Marquee">⏸</button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="app-body">
+                                                <!-- Sidebar Navigation -->
+      <aside class="cbs-sidebar">
+  <div class="cbs-sidebar-search-box">
+    <input type="text" class="cbs-sidebar-search-input" id="sidebarSearch" placeholder="Search sidebar menu..." onkeyup="filterSidebar(this.value)">
+    <span class="cbs-sidebar-search-icon">🔍</span>
+  </div>
+  <a href="../modules.html" class="cbs-sidebar-browse-all" style="">
+    <span>📁 Browse All Modules</span>
+    <span class="badge" style="background: rgba(0,0,0,0.25); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">196</span>
+  </a>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏢</span>
+        <span>Core Operations</span>
+      </div>
+      <span class="cbs-nav-group-badge">5</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="../dashboard.html" class="cbs-nav-link">Executive Dashboard / Main Navigation</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave.html" class="cbs-nav-link">Leave Master</a></li>
+      <li class="cbs-nav-item"><a href="emp-leave-settings.html" class="cbs-nav-link">Leave Settings</a></li>
+      <li class="cbs-nav-item"><a href="emp-payscale.html" class="cbs-nav-link">Pay Scale</a></li>
+      <li class="cbs-nav-item"><a href="salary-posting.html" class="cbs-nav-link">Salary Posting</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">👥</span>
+        <span>Customer Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">7</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="cust-submission.html" class="cbs-nav-link">CUSTOMER 15-H SUBMISSION</a></li>
+      <li class="cbs-nav-item"><a href="verify-bank-details.html" class="cbs-nav-link">CUSTOMER BANK DETAILS</a></li>
+      <li class="cbs-nav-item"><a href="customer-register.html" class="cbs-nav-link">CUSTOMER REGISTER</a></li>
+      <li class="cbs-nav-item"><a href="customer-details-report.html" class="cbs-nav-link">Customer Details Report</a></li>
+      <li class="cbs-nav-item"><a href="joint-account.html" class="cbs-nav-link">Joint Acc</a></li>
+      <li class="cbs-nav-item"><a href="nominee-details.html" class="cbs-nav-link">Nom Dtls</a></li>
+      <li class="cbs-nav-item"><a href="personal-ledger.html" class="cbs-nav-link">PERSONAL LEDGER</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🏦</span>
+        <span>Account Management</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-open.html" class="cbs-nav-link">ACCOUNT OPEN</a></li>
+      <li class="cbs-nav-item"><a href="bank-account-master.html" class="cbs-nav-link">Bank Account Master</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue-details.html" class="cbs-nav-link">Cheque Issue Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💳</span>
+        <span>Banking and Transactions</span>
+      </div>
+      <span class="cbs-nav-group-badge">11</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-transaction.html" class="cbs-nav-link">ACCOUNT TRANSACTION</a></li>
+      <li class="cbs-nav-item"><a href="bank-reconciliation.html" class="cbs-nav-link">BANK RECONCILIATION</a></li>
+      <li class="cbs-nav-item"><a href="batch-details.html" class="cbs-nav-link">Batch Dtls</a></li>
+      <li class="cbs-nav-item"><a href="cash-transfer.html" class="cbs-nav-link">CASH/FUND TRANSFER</a></li>
+      <li class="cbs-nav-item"><a href="chitty-details.html" class="cbs-nav-link">Chiity Dtls</a></li>
+      <li class="cbs-nav-item"><a href="neft-interest-payment.html" class="cbs-nav-link">DEPOSIT BULK INT.POST</a></li>
+      <li class="cbs-nav-item"><a href="entry-change.html" class="cbs-nav-link">ENTRY MODE CHANGE</a></li>
+      <li class="cbs-nav-item"><a href="ornament-image.html" class="cbs-nav-link">Ornament Img</a></li>
+      <li class="cbs-nav-item"><a href="asset-transaction.html" class="cbs-nav-link">PURCHASE</a></li>
+      <li class="cbs-nav-item"><a href="ticket-master.html" class="cbs-nav-link">TICKET MASTER</a></li>
+      <li class="cbs-nav-item"><a href="transaction-details.html" class="cbs-nav-link">Tran Dtls</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group" data-active-group="true">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">💰</span>
+        <span>Deposits</span>
+      </div>
+      <span class="cbs-nav-group-badge">3</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="deposit-loan.html" class="cbs-nav-link">Deposit Loan</a></li>
+      <li class="cbs-nav-item"><a href="deposit-master.html" class="cbs-nav-link active">Deposit Master</a></li>
+      <li class="cbs-nav-item"><a href="deposit-parameter.html" class="cbs-nav-link">Deposit Parameter</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📋</span>
+        <span>Loans and Credit</span>
+      </div>
+      <span class="cbs-nav-group-badge">30</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="loan-bdr-report.html" class="cbs-nav-link">BDR Statement</a></li>
+      <li class="cbs-nav-item"><a href="loan-dcb-report.html" class="cbs-nav-link">DCB</a></li>
+      <li class="cbs-nav-item"><a href="daily-collection-report.html" class="cbs-nav-link">Daily Collection Report</a></li>
+      <li class="cbs-nav-item"><a href="emi-due-list.html" class="cbs-nav-link">Daily DueList</a></li>
+      <li class="cbs-nav-item"><a href="daily-loan-report.html" class="cbs-nav-link">Daily GL Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-due-list.html" class="cbs-nav-link">Demand List</a></li>
+      <li class="cbs-nav-item"><a href="emi-bucket-report.html" class="cbs-nav-link">EMI Bucket Wise Rpt</a></li>
+      <li class="cbs-nav-item"><a href="fluid-resources-report.html" class="cbs-nav-link">Fluid Report</a></li>
+      <li class="cbs-nav-item"><a href="interest-demand-report.html" class="cbs-nav-link">FollowUp List</a></li>
+      <li class="cbs-nav-item"><a href="gold-items.html" class="cbs-nav-link">Gold Items</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-report.html" class="cbs-nav-link">Gold Ornaments Appraiser Report</a></li>
+      <li class="cbs-nav-item"><a href="gold-appraiser-entry.html" class="cbs-nav-link">Gold Ornaments Details</a></li>
+      <li class="cbs-nav-item"><a href="guarantor-details-report.html" class="cbs-nav-link">Guarantor Details</a></li>
+      <li class="cbs-nav-item"><a href="loan-action-taken.html" class="cbs-nav-link">LOAN ACTION TAKEN ENTRY</a></li>
+      <li class="cbs-nav-item"><a href="loan-application-form.html" class="cbs-nav-link">LOAN APPLICATION</a></li>
+      <li class="cbs-nav-item"><a href="loan-application.html" class="cbs-nav-link">LOAN APPLICATION STAGE 1</a></li>
+      <li class="cbs-nav-item"><a href="loan-disbursal.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-pi-form.html" class="cbs-nav-link">LOAN APPLICATION STAGE 2</a></li>
+      <li class="cbs-nav-item"><a href="loan-credit-approval.html" class="cbs-nav-link">LOAN APPLICATION STAGE 3</a></li>
+      <li class="cbs-nav-item"><a href="loan-legal-notice.html" class="cbs-nav-link">Legal Notice</a></li>
+      <li class="cbs-nav-item"><a href="loan-emi-chart.html" class="cbs-nav-link">Loan Emichart</a></li>
+      <li class="cbs-nav-item"><a href="loan-parameter.html" class="cbs-nav-link">Loan Parameter</a></li>
+      <li class="cbs-nav-item"><a href="loan-approval.html" class="cbs-nav-link">Loan Sanction</a></li>
+      <li class="cbs-nav-item"><a href="../login.html" class="cbs-nav-link">Login Page</a></li>
+      <li class="cbs-nav-item"><a href="npa-region-report.html" class="cbs-nav-link">NPA AREA WISE Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-npa-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="npa-period-report.html" class="cbs-nav-link">NPA Report</a></li>
+      <li class="cbs-nav-item"><a href="loan-open-close-report.html" class="cbs-nav-link">Opening Closing Report</a></li>
+      <li class="cbs-nav-item"><a href="scheme-outstand-report.html" class="cbs-nav-link">Scheme Wise Outstand</a></li>
+      <li class="cbs-nav-item"><a href="gold-redemption-report.html" class="cbs-nav-link">Stock Report</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">🛡️</span>
+        <span>Authorisation</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="manager-passing.html" class="cbs-nav-link">AUTHORISATION</a></li>
+      <li class="cbs-nav-item"><a href="transaction-cancellation.html" class="cbs-nav-link">Transaction Cancellation</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">📊</span>
+        <span>Reports and Enquiries</span>
+      </div>
+      <span class="cbs-nav-group-badge">15</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="acquaintance-report.html" class="cbs-nav-link">Acquiantance Report</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet-drilldown.html" class="cbs-nav-link">Balalnce Drill Down</a></li>
+      <li class="cbs-nav-item"><a href="balance-sheet.html" class="cbs-nav-link">Balalnce Sheet</a></li>
+      <li class="cbs-nav-item"><a href="bank-balance.html" class="cbs-nav-link">Bank Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-cash-report.html" class="cbs-nav-link">Cash Balance Report</a></li>
+      <li class="cbs-nav-item"><a href="daily-reports.html" class="cbs-nav-link">Cash Book</a></li>
+      <li class="cbs-nav-item"><a href="cheque-issue.html" class="cbs-nav-link">Cheque Issue</a></li>
+      <li class="cbs-nav-item"><a href="cibil-report.html" class="cbs-nav-link">Cibil Report</a></li>
+      <li class="cbs-nav-item"><a href="company-position.html" class="cbs-nav-link">Company Position</a></li>
+      <li class="cbs-nav-item"><a href="daily-business-report.html" class="cbs-nav-link">Daily Business Report</a></li>
+      <li class="cbs-nav-item"><a href="asset-depreciation.html" class="cbs-nav-link">Depreciation</a></li>
+      <li class="cbs-nav-item"><a href="income-expense-report.html" class="cbs-nav-link">MIS Reports</a></li>
+      <li class="cbs-nav-item"><a href="salary-statement.html" class="cbs-nav-link">PaySlip</a></li>
+      <li class="cbs-nav-item"><a href="profit-loss.html" class="cbs-nav-link">Profit &amp; Loss</a></li>
+      <li class="cbs-nav-item"><a href="trial-balance.html" class="cbs-nav-link">Trial Balance</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⚙️</span>
+        <span>System Administration and Masters</span>
+      </div>
+      <span class="cbs-nav-group-badge">14</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="account-group-master.html" class="cbs-nav-link">Account Group Creation</a></li>
+      <li class="cbs-nav-item"><a href="account-master.html" class="cbs-nav-link">Account Head Creation</a></li>
+      <li class="cbs-nav-item"><a href="area-master.html" class="cbs-nav-link">Area Master</a></li>
+      <li class="cbs-nav-item"><a href="asset-master.html" class="cbs-nav-link">Asset Master</a></li>
+      <li class="cbs-nav-item"><a href="branch-details.html" class="cbs-nav-link">Branch Details</a></li>
+      <li class="cbs-nav-item"><a href="change-password.html" class="cbs-nav-link">Change Password</a></li>
+      <li class="cbs-nav-item"><a href="emp-master.html" class="cbs-nav-link">Employee master</a></li>
+      <li class="cbs-nav-item"><a href="group-rights.html" class="cbs-nav-link">Group Rights</a></li>
+      <li class="cbs-nav-item"><a href="interest-rate-master.html" class="cbs-nav-link">Interest Rate Settings</a></li>
+      <li class="cbs-nav-item"><a href="region-master.html" class="cbs-nav-link">Region Master</a></li>
+      <li class="cbs-nav-item"><a href="remainder.html" class="cbs-nav-link">Reminder Settings</a></li>
+      <li class="cbs-nav-item"><a href="scheme-master.html" class="cbs-nav-link">Scheme Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-reg.html" class="cbs-nav-link">User Creation</a></li>
+      <li class="cbs-nav-item"><a href="user-rights.html" class="cbs-nav-link">User Rights</a></li>
+    </ul>
+  </div>
+  <div class="cbs-nav-group collapsed">
+    <div class="cbs-nav-group-header" onclick="toggleNavGroup(this)">
+      <div class="cbs-nav-group-title">
+        <span class="cbs-nav-icon">⏱️</span>
+        <span>Day Begin / Day End</span>
+      </div>
+      <span class="cbs-nav-group-badge">2</span>
+      <span class="cbs-nav-group-chevron">▼</span>
+    </div>
+    <ul class="cbs-nav-list">
+      <li class="cbs-nav-item"><a href="emp-attendance.html" class="cbs-nav-link">Attendence Marking</a></li>
+      <li class="cbs-nav-item"><a href="day-begin-end.html" class="cbs-nav-link">Daybegin</a></li>
+    </ul>
+  </div>
+</aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../dashboard.html">SMARTCORE</a></li>
+            <li class="breadcrumb-item">Customer & Accounts</li>
+            <li class="breadcrumb-item active">Deposit Master</li>
+          </ol>
+          <div class="page-quick-stats">
+            <span class="tag-badge tag-info">Term & Recurring Deposits</span>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <div>
+            <h1 class="page-title">DEPOSIT MASTER (FIXED & TERM DEPOSITS)</h1>
+            <p class="page-subtitle">Open, calculate maturity, configure standing instructions, and register nominees for term deposit accounts (Original: <code>DepositMaster.aspx</code>)</p>
+          </div>
+          <div class="header-actions">
+            <button type="button" class="btn btn-outline" onclick="CBS.clearForm('deposit-form')">Clear</button>
+            <button type="button" class="btn btn-primary" onclick="saveDeposit()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save Deposit
+            </button>
+          </div>
+        </div>
+
+        <form id="deposit-form" onsubmit="event.preventDefault(); saveDeposit();">
+          <!-- Section 1: Header Parameters -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="card-title">1. Deposit Scheme & Operation Mode</h2>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-4col">
+                <div class="form-group">
+                  <label for="CmbBranch">Branch <span class="required">*</span></label>
+                  <select id="CmbBranch" class="form-control" required>
+                    <option value="001">001 - MAIN BRANCH</option>
+                    <option value="002">002 - TOWN BRANCH</option>
+                    <option value="003">003 - INDUSTRIAL ESTATE</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbOpMode">Mode of Operation <span class="required">*</span></label>
+                  <select id="CmbOpMode" class="form-control" required>
+                    <option value="SELF">SINGLE / SELF</option>
+                    <option value="EORS">EITHER OR SURVIVOR</option>
+                    <option value="JOINT">JOINTLY OPERATED</option>
+                    <option value="ANYONE">ANYONE OR SURVIVORS</option>
+                    <option value="POA">POWER OF ATTORNEY</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbScheme">Deposit Scheme <span class="required">*</span></label>
+                  <select id="CmbScheme" class="form-control" required onchange="onDepositSchemeChange()">
+                    <option value="FD-REG">FD-REG: Standard Term Deposit (Cumulative)</option>
+                    <option value="FD-SR">FD-SR: Senior Citizen Fixed Deposit</option>
+                    <option value="RD-GEN">RD-GEN: Recurring Monthly Deposit</option>
+                    <option value="MIS-MTH">MIS-MTH: Monthly Income Scheme</option>
+                    <option value="QIS-QTR">QIS-QTR: Quarterly Interest Payout</option>
+                    <option value="DEB-SEC">DEB-SEC: Secured Debenture Certificate</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="TxtNoOfOperator">No of Operators</label>
+                  <input type="number" id="TxtNoOfOperator" class="form-control" value="1" min="1" max="5">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Account Holder / Customer Details (DgvCustomer) -->
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-between align-center">
+              <div>
+                <h2 class="card-title">2. Customer / Account Holder Particulars (DgvCustomer)</h2>
+                <span class="text-muted text-small">Primary depositor and joint holder details linked to CBS Master</span>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="lookupCustomerModal()">
+                + Select / Change Customer
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="DgvCustomer">
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Relation</th>
+                    <th>Address</th>
+                    <th>DOB</th>
+                    <th>Age</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="holder-tbody">
+                  <tr>
+                    <td><strong>CUST-10492</strong></td>
+                    <td><strong>RAJESH VERMA</strong></td>
+                    <td>PRIMARY HOLDER (SELF)</td>
+                    <td>24/B, GANDHI MARG, EXTENSION 2, MAIN ROAD, PIN 560001</td>
+                    <td>14/08/1982</td>
+                    <td>44 Yrs</td>
+                    <td><span class="status-badge status-active">KYC Verified</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 3: Deposit Tenure, Dates, and Interest Terms -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="card-title">3. Deposit Financials, Tenor & Maturity Calculation</h2>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-3col">
+                <!-- Row 1: Dates -->
+                <div class="form-group">
+                  <label for="Ce_OpeningDate">Opening Date <span class="required">*</span></label>
+                  <input type="text" id="Ce_OpeningDate" class="form-control" value="29/10/2026" readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="Ce_EffectiveDt">Effective Date <span class="required">*</span></label>
+                  <input type="date" id="Ce_EffectiveDt" class="form-control" value="2026-10-29" onchange="calculateDepositMaturity()">
+                </div>
+
+                <div class="form-group">
+                  <label for="Ce_DueDate">Due / Maturity Date</label>
+                  <input type="text" id="Ce_DueDate" class="form-control font-bold text-navy" value="29/10/2027" readonly>
+                </div>
+
+                <!-- Row 2: Term and Interest -->
+                <div class="form-group">
+                  <label for="Txt_Month">Term Months <span class="required">*</span></label>
+                  <input type="number" id="Txt_Month" class="form-control text-right" value="12" min="1" max="120" oninput="calculateDepositMaturity()" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="Txt_Days">Term Days</label>
+                  <input type="number" id="Txt_Days" class="form-control text-right" value="0" min="0" max="365" oninput="calculateDepositMaturity()">
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbInterestPayMode">Interest Pay Mode <span class="required">*</span></label>
+                  <select id="CmbInterestPayMode" class="form-control" onchange="calculateDepositMaturity()">
+                    <option value="CUMULATIVE">ON MATURITY (CUMULATIVE)</option>
+                    <option value="MONTHLY">MONTHLY CREDIT</option>
+                    <option value="QUARTERLY">QUARTERLY CREDIT</option>
+                    <option value="HALF_YEARLY">HALF YEARLY CREDIT</option>
+                    <option value="ANNUAL">ANNUAL PAYOUT</option>
+                  </select>
+                </div>
+
+                <!-- Row 3: Principal, Rate, Calculated Maturity -->
+                <div class="form-group">
+                  <label for="Txt_InitialDeposit">Initial Principal Deposit (₹) <span class="required">*</span></label>
+                  <input type="number" id="Txt_InitialDeposit" class="form-control text-right font-mono font-bold" value="200000" step="1000" oninput="calculateDepositMaturity()" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="Txt_IntPercent">Interest Rate (% p.a.) <span class="required">*</span></label>
+                  <input type="number" id="Txt_IntPercent" class="form-control text-right font-mono font-bold" value="7.25" step="0.05" oninput="calculateDepositMaturity()" required>
+                </div>
+
+                <div class="form-group highlight-box">
+                  <label for="Txt_MaturityAmt">Calculated Maturity Amount (₹)</label>
+                  <input type="text" id="Txt_MaturityAmt" class="form-control text-right font-mono font-bold text-success text-large" value="2,14,500.00" readonly>
+                  <span class="text-small text-muted mt-1" id="maturity-words-label">Two Lakh Fourteen Thousand Five Hundred Rupees Only</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Operational Settings, Nominee, & Standing Instructions -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h2 class="card-title">4. Nominee, Agent & Standing Instructions</h2>
+            </div>
+            <div class="card-body">
+              <div class="grid-form-3col">
+                <div class="form-group">
+                  <label for="CmbAgent">Agent / Deposit Mobilizer</label>
+                  <select id="CmbAgent" class="form-control">
+                    <option value="DIRECT">DIRECT / COUNTER WALK-IN</option>
+                    <option value="AGT-001">AGT-001: M. SUNDARAM</option>
+                    <option value="AGT-002">AGT-002: PRIYA NAIR</option>
+                    <option value="AGT-003">AGT-003: S. VENKATESH</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbCanvassedBy">Canvassed By (Staff ID)</label>
+                  <select id="CmbCanvassedBy" class="form-control">
+                    <option value="SELF">NONE / DIRECT CUSTOMER</option>
+                    <option value="EMP-101">EMP-101: RAMESH BABU (OFFICER)</option>
+                    <option value="EMP-102">EMP-102: SNEHA PATEL (CLERK)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="CmbCashTransfer">Payment Mode <span class="required">*</span></label>
+                  <select id="CmbCashTransfer" class="form-control" onchange="toggleBankDetails(this.value)">
+                    <option value="CASH">CASH ACROSS COUNTER</option>
+                    <option value="TRANSFER">ACCOUNT TRANSFER (INTERNAL)</option>
+                    <option value="CHEQUE">CLEARING CHEQUE / DD</option>
+                    <option value="RTGS">RTGS / NEFT INWARD</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="Txt_NoOfNomine">Nomination Registered?</label>
+                  <select id="CmbNomReq" class="form-control" onchange="toggleNomineeSection(this.value)">
+                    <option value="Y">YES (REGISTER NOMINEE)</option>
+                    <option value="N">NO (NOMINATION WAIVED)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="Ddl_SI">Standing Instruction</label>
+                  <select id="Ddl_SI" class="form-control" onchange="toggleStandingSection(this.value)">
+                    <option value="N">NO STANDING INSTRUCTION</option>
+                    <option value="Y">YES (AUTO-DEBIT / CREDIT)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="Ddl_Split">Split Certificate Facility</label>
+                  <select id="Ddl_Split" class="form-control" onchange="toggleSplitSection(this.value)">
+                    <option value="N">SINGLE CERTIFICATE</option>
+                    <option value="Y">SPLIT INTO MULTIPLE CERTS</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Nominee Sub-Section (NomDiv) -->
+              <div id="NomDiv" class="subcard mt-3">
+                <h4 class="subcard-title text-navy">Nominee Particulars (DA-1 Form)</h4>
+                <div class="grid-form-3col">
+                  <div class="form-group">
+                    <label for="Txt_NomName">Nominee Full Name</label>
+                    <input type="text" id="Txt_NomName" class="form-control" value="SMT. PRIYA VERMA">
+                  </div>
+                  <div class="form-group">
+                    <label for="CmbNomRel">Relationship to Depositor</label>
+                    <select id="CmbNomRel" class="form-control">
+                      <option value="SPOUSE">SPOUSE (WIFE)</option>
+                      <option value="SON">SON</option>
+                      <option value="DAUGHTER">DAUGHTER</option>
+                      <option value="MOTHER">MOTHER</option>
+                      <option value="FATHER">FATHER</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="Txt_NomPh">Nominee Contact Number</label>
+                    <input type="text" id="Txt_NomPh" class="form-control" value="9845012345">
+                  </div>
+                  <div class="form-group span-3">
+                    <label for="Txt_NomAdd">Nominee Address</label>
+                    <input type="text" id="Txt_NomAdd" class="form-control" value="24/B, GANDHI MARG, EXTENSION 2, MAIN ROAD, PIN 560001">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Standing Instruction Sub-Section (StandDiv) -->
+              <div id="StandDiv" class="subcard mt-3" style="display: none;">
+                <h4 class="subcard-title text-navy">Standing Instruction Account Linking</h4>
+                <div class="grid-form-3col">
+                  <div class="form-group">
+                    <label for="CmbStandBr">Standing Branch</label>
+                    <select id="CmbStandBr" class="form-control">
+                      <option value="001">001 - MAIN BRANCH</option>
+                      <option value="002">002 - TOWN BRANCH</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="CmbStandSch">Standing Scheme</label>
+                    <select id="CmbStandSch" class="form-control">
+                      <option value="SB-101">SB-101: Savings Bank General</option>
+                      <option value="CA-201">CA-201: Current Account Commercial</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="TxtStandAcNo">Linked Account No</label>
+                    <input type="text" id="TxtStandAcNo" class="form-control" placeholder="e.g. SB-001-20944">
+                  </div>
+                  <div class="form-group span-3">
+                    <label for="TxtStandAcHoldenName">Account Holder Name & Address</label>
+                    <input type="text" id="TxtStandAcHoldenName" class="form-control" placeholder="Verified Account Holder Name">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Split Certificates Sub-Section (DivMultipleDep) -->
+              <div id="DivMultipleDep" class="subcard mt-3" style="display: none;">
+                <h4 class="subcard-title text-navy">Split Certificate Breakdown (DgvDepDtls)</h4>
+                <div class="grid-form-4col mb-2">
+                  <div class="form-group">
+                    <label for="txtNoofSplit">No of Splits</label>
+                    <input type="number" id="txtNoofSplit" class="form-control" value="2" min="2" max="10">
+                  </div>
+                  <div class="form-group">
+                    <label for="txtSplitAmt">Amount per Split (₹)</label>
+                    <input type="number" id="txtSplitAmt" class="form-control" value="100000">
+                  </div>
+                  <div class="form-group">
+                    <label for="txtSplitMonths">Months</label>
+                    <input type="number" id="txtSplitMonths" class="form-control" value="12">
+                  </div>
+                  <div class="form-group d-flex align-end">
+                    <button type="button" class="btn btn-secondary w-100" onclick="addSplitRow()">+ Add Split Certificate</button>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="data-table" id="DgvDepDtls">
+                    <thead>
+                      <tr>
+                        <th>Cert No</th>
+                        <th>Tenor</th>
+                        <th>Due Date</th>
+                        <th class="text-right">Amount (₹)</th>
+                        <th class="text-right">Rate %</th>
+                        <th class="text-right">Maturity Amt (₹)</th>
+                        <th>Pay Mode</th>
+                        <th>Nominee</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="split-tbody">
+                      <tr>
+                        <td>CERT-001/A</td>
+                        <td>12 Mths</td>
+                        <td>29/10/2027</td>
+                        <td class="text-right font-mono font-bold">1,00,000.00</td>
+                        <td class="text-right font-mono">7.25%</td>
+                        <td class="text-right font-mono font-bold text-success">1,07,250.00</td>
+                        <td>CUMULATIVE</td>
+                        <td>SMT. PRIYA VERMA</td>
+                        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                      </tr>
+                      <tr>
+                        <td>CERT-001/B</td>
+                        <td>12 Mths</td>
+                        <td>29/10/2027</td>
+                        <td class="text-right font-mono font-bold">1,00,000.00</td>
+                        <td class="text-right font-mono">7.25%</td>
+                        <td class="text-right font-mono font-bold text-success">1,07,250.00</td>
+                        <td>CUMULATIVE</td>
+                        <td>SMT. PRIYA VERMA</td>
+                        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- General Remarks -->
+              <div class="form-group mt-3">
+                <label for="Txt_Remarks">Remarks / Special Conditions</label>
+                <input type="text" id="Txt_Remarks" class="form-control" placeholder="Enter special remarks or mandate instructions">
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="CBS.clearForm('deposit-form')">Clear Form</button>
+            <a href="../dashboard.html" class="btn btn-secondary">Cancel & Close</a>
+            <button type="submit" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save Deposit Account
+            </button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function calculateDepositMaturity() {
+      const principal = parseFloat(document.getElementById('Txt_InitialDeposit').value) || 0;
+      const rate = parseFloat(document.getElementById('Txt_IntPercent').value) || 0;
+      const months = parseInt(document.getElementById('Txt_Month').value) || 0;
+      const days = parseInt(document.getElementById('Txt_Days').value) || 0;
+      const payMode = document.getElementById('CmbInterestPayMode').value;
+
+      // Compound interest on maturity or simple interest payout
+      const totalYears = (months / 12) + (days / 365);
+      let maturityAmt = principal;
+
+      if (payMode === 'CUMULATIVE') {
+        // Quarterly compound standard for CBS deposits
+        const n = 4;
+        maturityAmt = principal * Math.pow((1 + (rate / (100 * n))), n * totalYears);
+      } else {
+        // Regular payout mode: maturity principal returned plus periodic payouts
+        maturityAmt = principal;
+      }
+
+      document.getElementById('Txt_MaturityAmt').value = maturityAmt.toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      // Update Due Date
+      const effDateVal = document.getElementById('Ce_EffectiveDt').value;
+      if (effDateVal) {
+        const d = new Date(effDateVal);
+        d.setMonth(d.getMonth() + months);
+        d.setDate(d.getDate() + days);
+        const dayStr = String(d.getDate()).padStart(2, '0');
+        const mthStr = String(d.getMonth() + 1).padStart(2, '0');
+        const yrStr = d.getFullYear();
+        document.getElementById('Ce_DueDate').value = `${dayStr}/${mthStr}/${yrStr}`;
+      }
+    }
+
+    function onDepositSchemeChange() {
+      const scheme = document.getElementById('CmbScheme').value;
+      if (scheme === 'FD-SR') {
+        document.getElementById('Txt_IntPercent').value = '7.75';
+        CBS.showToast('Senior Citizen Rate applied (+0.50% p.a.)', 'info');
+      } else if (scheme === 'RD-GEN') {
+        document.getElementById('Txt_IntPercent').value = '7.00';
+      } else {
+        document.getElementById('Txt_IntPercent').value = '7.25';
+      }
+      calculateDepositMaturity();
+    }
+
+    function toggleNomineeSection(val) {
+      document.getElementById('NomDiv').style.display = (val === 'Y') ? 'block' : 'none';
+    }
+
+    function toggleStandingSection(val) {
+      document.getElementById('StandDiv').style.display = (val === 'Y') ? 'block' : 'none';
+    }
+
+    function toggleSplitSection(val) {
+      document.getElementById('DivMultipleDep').style.display = (val === 'Y') ? 'block' : 'none';
+    }
+
+    function toggleBankDetails(val) {
+      CBS.showToast('Payment Mode selected: ' + val, 'info');
+    }
+
+    function addSplitRow() {
+      const splitAmt = parseFloat(document.getElementById('txtSplitAmt').value) || 50000;
+      const tbody = document.getElementById('split-tbody');
+      const count = tbody.querySelectorAll('tr').length + 1;
+      const certId = 'CERT-001/' + String.fromCharCode(64 + count);
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${certId}</td>
+        <td>12 Mths</td>
+        <td>29/10/2027</td>
+        <td class="text-right font-mono font-bold">${splitAmt.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+        <td class="text-right font-mono">7.25%</td>
+        <td class="text-right font-mono font-bold text-success">${(splitAmt * 1.0725).toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+        <td>CUMULATIVE</td>
+        <td>SMT. PRIYA VERMA</td>
+        <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Remove</button></td>
+      `;
+      tbody.appendChild(row);
+      CBS.showToast(`Split Certificate ${certId} added`, 'success');
+    }
+
+    function lookupCustomerModal() {
+      CBS.showToast('Customer Master lookup active. CUST-10492 linked.', 'info');
+    }
+
+    function saveDeposit() {
+      const principal = document.getElementById('Txt_InitialDeposit').value;
+      const maturity = document.getElementById('Txt_MaturityAmt').value;
+      CBS.showToast(`Term Deposit Account created! Principal: ₹${principal}, Maturity: ₹${maturity}. Sent to Manager Authorisation queue.`, 'success');
+    }
+  </script>
+</body>
+</html>
